@@ -1,11 +1,9 @@
 package Views.Excluir;
 
+import Views.Cadastro.CadastroCifras;
 import Views.Excluir.rmCifra;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
+import Views.Visualizar.VisualizarCifras;
+import main.Login;
 
 public class rmCifra extends javax.swing.JFrame {
 
@@ -15,14 +13,7 @@ public class rmCifra extends javax.swing.JFrame {
         setLocationRelativeTo(this);
         setTitle("Remover cifra");
     }
-       
-
-    
-    String home = System.getProperty("user.home");
-    
-
-    
-        
+  
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -133,9 +124,7 @@ public class rmCifra extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
-        apag.nome = confirmUsu.getText();
-        apag.apagarCi = cifrarm.getText();
-        apag.Clear();
+
     }//GEN-LAST:event_btnOkActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed

@@ -176,7 +176,6 @@ public class CadastrarUsuario extends javax.swing.JFrame {
     private void jTF_SenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTF_SenhaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTF_SenhaActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         new Login().setVisible(true);
         dispose();
@@ -191,7 +190,6 @@ public class CadastrarUsuario extends javax.swing.JFrame {
             String a = "" + foto.getSelectedFile().getName();
             tfFoto.setText(a);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Não foi possível carregar a capa.");
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 

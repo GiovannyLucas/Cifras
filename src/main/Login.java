@@ -4,6 +4,8 @@ import DAO.Conexao;
 import DAO.UsuarioDAO;
 import Views.Cadastro.CadastrarUsuario;
 import Views.Visualizar.TelaCifras;
+import java.io.File;
+import java.nio.file.Files;
 import java.sql.Connection;
 import javax.swing.JOptionPane;
 
@@ -14,12 +16,22 @@ public class Login extends javax.swing.JFrame {
         setSize(842, 529);
         setLocationRelativeTo(this);   
         setTitle("Login");
+        criarPasta();
     }
      
     public void LimparCampos(){
         nomeUsu.setText("");
         passLog.setText("");
     }
+    
+    public void criarPasta(){
+        String home = System.getProperty("user.home");
+        File pasta = new File(home+"/Imagens");
+        if (!pasta.exists()) {
+            pasta.mkdir();
+        }
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

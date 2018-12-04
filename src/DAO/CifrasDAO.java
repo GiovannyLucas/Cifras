@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 public class CifrasDAO extends ExecuteSQL {
@@ -35,5 +37,48 @@ public class CifrasDAO extends ExecuteSQL {
             return e.getMessage();
         }
     }
-   
+
+    public List<Cifras> ListarCombo(String nome){
+        String sql = "SELECT nome_musica FROM cifras WHERE nome_usuario = '"+nome+"' ORDER BY nome_musica";
+        List<Cifras> lista = new ArrayList<>();
+        try {
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs != null) {
+                while (rs.next()) {
+                    Cifras a = new Cifras();
+                    a.setNomeMusica(rs.getString(1));
+                    lista.add(a);
+                }
+                return lista;
+            } else {
+                return null;
+            }
+        } catch (Exception e) {
+            return null;
+        }
+    }  
+
+    public List<Cifras> ConsultaCifra(String nome){
+        String sql = "SELECT cifra FROM cifras WHERE nome_musica = '"+ nome +"'";
+        List<Cifras> lista = new ArrayList<>();
+        try {
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs != null) {
+                while (rs.next()) {
+                    Cifras a = new Cifras();
+                    a.setCifra(rs.getString(1));
+                    lista.add(a);
+                }
+                return lista;
+            } else {
+                return null;
+            }
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }

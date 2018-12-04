@@ -8,7 +8,7 @@ import Models.Usuario;
 import javax.swing.JOptionPane;
 import main.Login;
 import Views.Visualizar.TelaCifras;
-import main.VisualizarCifras;
+import Views.Visualizar.VisualizarCifras;
 import Views.Excluir.rmCifra;
 import java.sql.Connection;
 

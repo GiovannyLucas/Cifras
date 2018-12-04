@@ -17,7 +17,7 @@ public class UsuarioDAO extends ExecuteSQL {
         boolean finalResult = false;
         
         try {
-            String consulta  = "SELECT nome, senha FROM admin WHERE nome = '"+ nome + "' AND senha = '"+ senha +"'";
+            String consulta  = "SELECT nome, senha FROM usuarios WHERE nome = '"+ nome + "' AND senha = '"+ senha +"'";
             PreparedStatement ps = getCon().prepareStatement(consulta);
             ResultSet rs = ps.executeQuery();
             
@@ -56,5 +56,26 @@ public class UsuarioDAO extends ExecuteSQL {
             return e.getMessage();
         }
     }
-   
+
+        public boolean VerificaLogin(String nome){
+        boolean finalResult = false;
+        
+        try {
+            String consulta  = "SELECT nome FROM usuarios WHERE nome = '"+ nome +"'";
+            PreparedStatement ps = getCon().prepareStatement(consulta);
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs != null) {
+                while (rs.next()) {                    
+                    Usuario a = new Usuario();
+                    a.setNome(rs.getString(1));
+                    finalResult = true;
+                }
+            }
+            
+        } catch (SQLException ex) {
+            ex.getMessage();
+        }
+        return finalResult;
+    }
 }

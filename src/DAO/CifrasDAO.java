@@ -19,7 +19,7 @@ public class CifrasDAO extends ExecuteSQL {
         try {
             PreparedStatement ps = getCon().prepareStatement(sql);
             
-            ps.setInt(1, a.getIdUsuario());
+            ps.setString(1, a.getNomeUsuario());
             ps.setString(2, a.getNomeMusica());
             ps.setString(3, a.getNomeCantor());
             ps.setString(4, a.getTom());

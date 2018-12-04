@@ -3,7 +3,7 @@ package Models;
 public class Cifras {
     
     private int idCifra;
-    private int idUsuario;
+    private String nomeUsuario;
     private String nomeMusica;
     private String nomeCantor;
     private String tom;
@@ -17,12 +17,12 @@ public class Cifras {
         this.idCifra = idCifra;
     }
 
-    public int getIdUsuario() {
-        return idUsuario;
+    public String getNomeUsuario() {
+        return nomeUsuario;
     }
 
-    public void setIdUsuario(int idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setNomeUsuario(String nomeUsuario) {
+        this.nomeUsuario = nomeUsuario;
     }
 
     public String getNomeMusica() {

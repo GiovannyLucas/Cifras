@@ -2,14 +2,9 @@ package Views.Visualizar;
 
 import DAO.CifrasDAO;
 import DAO.Conexao;
-import DAO.UsuarioDAO;
 import Models.Cifras;
-import Models.Usuario;
 import Views.Cadastro.CadastroCifras;
 import Views.Excluir.rmCifra;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
@@ -95,8 +90,9 @@ public class VisualizarCifras extends javax.swing.JFrame {
         fundo.setBounds(420, 250, 260, 220);
 
         mostrar.setEditable(false);
-        mostrar.setColumns(20);
-        mostrar.setRows(5);
+        mostrar.setColumns(10);
+        mostrar.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
+        mostrar.setRows(1);
         jScrollPane2.setViewportView(mostrar);
 
         getContentPane().add(jScrollPane2);

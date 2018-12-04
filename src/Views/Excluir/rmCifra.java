@@ -1,8 +1,15 @@
 package Views.Excluir;
 
+import DAO.CifrasDAO;
+import DAO.Conexao;
+import Models.Cifras;
 import Views.Cadastro.CadastroCifras;
 import Views.Excluir.rmCifra;
 import Views.Visualizar.VisualizarCifras;
+import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
 import main.Login;
 
 public class rmCifra extends javax.swing.JFrame {
@@ -12,17 +19,33 @@ public class rmCifra extends javax.swing.JFrame {
         setSize(842,569);
         setLocationRelativeTo(this);
         setTitle("Remover cifra");
+        AtualizaCombo();
     }
-  
+
+    private void AtualizaCombo(){
+        Connection con = Conexao.AbrirConexao();
+        CifrasDAO sql = new CifrasDAO(con);
+        List<Cifras> lista = new ArrayList<>();
+        String usuario = confirmUsu.getText();
+        lista = sql.ListarCombo(usuario);
+        jComboBox1.addItem("");
+        
+        for (Cifras b : lista) {
+            jComboBox1.addItem(b.getNomeMusica());
+        }
+        Conexao.FecharConexao((com.mysql.jdbc.Connection) con);
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         confirm1 = new javax.swing.JLabel();
-        cifrarm = new javax.swing.JTextField();
         btnOk = new javax.swing.JButton();
         confirmUsu = new javax.swing.JTextField();
         confirm = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
         fundo = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -40,9 +63,7 @@ public class rmCifra extends javax.swing.JFrame {
         confirm1.setFont(new java.awt.Font("Yu Gothic Medium", 0, 13)); // NOI18N
         confirm1.setText("Cifra a ser deletada:");
         getContentPane().add(confirm1);
-        confirm1.setBounds(570, 170, 130, 30);
-        getContentPane().add(cifrarm);
-        cifrarm.setBounds(510, 200, 250, 40);
+        confirm1.setBounds(570, 200, 130, 30);
 
         btnOk.setFont(new java.awt.Font("Yu Gothic Medium", 0, 14)); // NOI18N
         btnOk.setText("DELETAR");
@@ -61,6 +82,23 @@ public class rmCifra extends javax.swing.JFrame {
         getContentPane().add(confirm);
         confirm.setBounds(580, 80, 110, 30);
 
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jComboBox1);
+        jComboBox1.setBounds(510, 230, 250, 40);
+
+        jButton1.setText("Pesquisar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1);
+        jButton1.setBounds(570, 160, 130, 30);
+
         fundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/robo.jpg"))); // NOI18N
         getContentPane().add(fundo);
         fundo.setBounds(0, 0, 840, 530);
@@ -68,6 +106,11 @@ public class rmCifra extends javax.swing.JFrame {
         jMenu1.setText("Cifras");
 
         jMenuItem1.setText("Ver todas as cifras...");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem1);
 
         jMenuItem2.setText("Cadastrar nova cifra");
@@ -124,7 +167,29 @@ public class rmCifra extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
-
+        String usuario = confirmUsu.getText();
+        String nomeMusica = jComboBox1.getSelectedItem().toString();
+        
+        Connection con = Conexao.AbrirConexao();
+        CifrasDAO sql = new CifrasDAO(con);
+        Cifras a = new Cifras();
+        
+        if (nomeMusica.equals("")) {
+            JOptionPane.showMessageDialog(null, "Nenhum campo selecionado!",
+                    "Video Locadora", JOptionPane.WARNING_MESSAGE);
+        } else {
+            int b = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir"+
+                    "\n ("+ usuario +") -> ("+ nomeMusica +") ?", "Projeto Cifras",
+                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (b == 0) {
+                a.setNomeUsuario(usuario);
+                a.setNomeMusica(nomeMusica);
+                sql.ExcluirCifra(a);
+                Conexao.FecharConexao((com.mysql.jdbc.Connection) con);
+                dispose();
+                new rmCifra().setVisible(true);
+            }
+        }
     }//GEN-LAST:event_btnOkActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
@@ -135,6 +200,36 @@ public class rmCifra extends javax.swing.JFrame {
         new VisualizarCifras().setVisible(true);
         dispose(); 
     }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        Connection con = Conexao.AbrirConexao();
+        CifrasDAO sql = new CifrasDAO(con);
+        List<Cifras> lista = new ArrayList<>();
+        String nome = jComboBox1.getSelectedItem().toString();
+
+        lista = sql.ConsultaCifra(nome);
+
+        Conexao.FecharConexao((com.mysql.jdbc.Connection) con);
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Connection con = Conexao.AbrirConexao();
+        CifrasDAO sql = new CifrasDAO(con);
+        List<Cifras> lista = new ArrayList<>();
+        String usuario = confirmUsu.getText();
+        lista = sql.ListarCombo(usuario);
+        jComboBox1.addItem("");
+        
+        for (Cifras b : lista) {
+            jComboBox1.addItem(b.getNomeMusica());
+        }
+        Conexao.FecharConexao((com.mysql.jdbc.Connection) con);        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        new VisualizarCifras().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
 
     public static void main(String args[]) {
@@ -172,11 +267,12 @@ public class rmCifra extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnOk;
-    private javax.swing.JTextField cifrarm;
     private javax.swing.JLabel confirm;
     private javax.swing.JLabel confirm1;
     private javax.swing.JTextField confirmUsu;
     private javax.swing.JLabel fundo;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;

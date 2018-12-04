@@ -81,4 +81,21 @@ public class CifrasDAO extends ExecuteSQL {
             return null;
         }
     }
+    
+    public String ExcluirCifra(Cifras a){
+        String sql = "DELETE FROM cifras WHERE nome_usuario = ? AND nome_musica = ?";
+        try {
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ps.setString(1, a.getNomeUsuario());
+            ps.setString(2, a.getNomeMusica());
+            
+            if (ps.executeUpdate() > 0) {
+                return "Excluído com sucesso!";
+            } else {
+                return "Erro ao excluir!";
+            }
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+    }    
 }

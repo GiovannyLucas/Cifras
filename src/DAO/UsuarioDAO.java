@@ -37,15 +37,13 @@ public class UsuarioDAO extends ExecuteSQL {
     }
     
     public String Cadastro_Usuario(Usuario a) {
-        String sql = "INSERT INTO usuarios VALUES (0,?,?,?,?)";
+        String sql = "INSERT INTO usuarios VALUES (0,?,?,?)";
         try {
             PreparedStatement ps = getCon().prepareStatement(sql);
             
             ps.setString(1, a.getNome());
             ps.setString(2, a.getEmail());
             ps.setString(3, a.getSenha());
-            ps.setString(4, a.getImg());
-            
             
             if (ps.executeUpdate() > 0) {
                 return "Inserido com sucesso!";

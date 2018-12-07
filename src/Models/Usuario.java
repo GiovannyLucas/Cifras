@@ -6,7 +6,6 @@ public class Usuario {
     private String nome;
     private String email;
     private String senha;
-    private String img;
 
     public int getId() {
         return id;
@@ -39,14 +38,4 @@ public class Usuario {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-
-    public String getImg() {
-        return img;
-    }
-
-    public void setImg(String img) {
-        this.img = img;
-    }
-    
-    
 }

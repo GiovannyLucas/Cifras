@@ -3,11 +3,14 @@ package Views.Visualizar;
 import DAO.CifrasDAO;
 import DAO.Conexao;
 import Models.Cifras;
-import Views.Cadastro.CadastroCifras;
+import Views.Cadastrar.CadastroCifras;
+import Views.Consultar.TelaCifras;
 import Views.Excluir.rmCifra;
+import java.io.File;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import main.Login;
 
 public class VisualizarCifras extends javax.swing.JFrame {
@@ -17,37 +20,49 @@ public class VisualizarCifras extends javax.swing.JFrame {
         setSize(842,569);
         setLocationRelativeTo(this);
         setTitle("Ver e tocar - CIFRA");
-        AtualizaCombo();
+        Combo();
     }
-    
-    private void AtualizaCombo(){
-        Connection con = Conexao.AbrirConexao();
-        CifrasDAO sql = new CifrasDAO(con);
-        List<Cifras> lista = new ArrayList<>();
-        String usuario = usu.getText();
-        lista = sql.ListarCombo(usuario);
-        jComboBox1.addItem("");
-        
-        for (Cifras b : lista) {
-            jComboBox1.addItem(b.getNomeMusica());
-        }
-        Conexao.FecharConexao((com.mysql.jdbc.Connection) con);
+
+    public void Combo(){
+        String home = System.getProperty("user.home");
+        try {
+            File file = new File(home+"/User");
+            File afile[] = file.listFiles();
+            int i = 0;
+            //Pega nome do usuário 
+            for (int j = afile.length; i < j; i++) {
+                    File arquivos = afile[i];
+                    String nome = arquivos.getName();
+                    String usuario = nome.substring(0, nome.length()-4);
+                    
+                    Connection con = Conexao.AbrirConexao();
+                    CifrasDAO sql = new CifrasDAO(con);
+                    List<Cifras> lista = new ArrayList<>();
+                    lista = sql.ListarCombo(usuario);
+                    jComboBox1.addItem("");
+                    
+                    //Lista as cifras do usuário
+                    for (Cifras b : lista) {
+                        jComboBox1.addItem(b.getNomeMusica());
+                    }
+                    Conexao.FecharConexao((com.mysql.jdbc.Connection) con);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao criar cookie!", "Projeto Cifras",
+                            JOptionPane.ERROR_MESSAGE);
+        }    
     }
-  
     String home = System.getProperty("user.home");
        
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnOk = new javax.swing.JButton();
         confirmS = new javax.swing.JLabel();
-        usu = new javax.swing.JTextField();
-        confirm = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
         fundo = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         mostrar = new javax.swing.JTextArea();
-        jComboBox1 = new javax.swing.JComboBox<>();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -61,50 +76,34 @@ public class VisualizarCifras extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(null);
 
-        btnOk.setFont(new java.awt.Font("Yu Gothic Medium", 0, 14)); // NOI18N
-        btnOk.setText("OK");
-        btnOk.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOkActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnOk);
-        btnOk.setBounds(110, 330, 140, 90);
-
         confirmS.setFont(new java.awt.Font("Yu Gothic Medium", 0, 13)); // NOI18N
         confirmS.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         confirmS.setText("Cifra que quer vizualizar:");
         getContentPane().add(confirmS);
-        confirmS.setBounds(60, 200, 220, 30);
-        getContentPane().add(usu);
-        usu.setBounds(60, 120, 220, 30);
+        confirmS.setBounds(100, 30, 220, 30);
 
-        confirm.setFont(new java.awt.Font("Yu Gothic Medium", 0, 13)); // NOI18N
-        confirm.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        confirm.setText("Cofirmar usuário:");
-        getContentPane().add(confirm);
-        confirm.setBounds(60, 90, 220, 30);
-
-        fundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/images.jpg"))); // NOI18N
-        getContentPane().add(fundo);
-        fundo.setBounds(420, 250, 260, 220);
-
-        mostrar.setEditable(false);
-        mostrar.setColumns(10);
-        mostrar.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
-        mostrar.setRows(1);
-        jScrollPane2.setViewportView(mostrar);
-
-        getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(340, 60, 460, 150);
-
+        jComboBox1.setFont(new java.awt.Font("Exotc350 Bd BT", 1, 12)); // NOI18N
+        jComboBox1.setToolTipText("");
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
             }
         });
         getContentPane().add(jComboBox1);
-        jComboBox1.setBounds(60, 230, 220, 30);
+        jComboBox1.setBounds(50, 60, 310, 50);
+
+        fundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/erg.png"))); // NOI18N
+        getContentPane().add(fundo);
+        fundo.setBounds(40, 140, 330, 330);
+
+        mostrar.setEditable(false);
+        mostrar.setColumns(10);
+        mostrar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        mostrar.setRows(1);
+        jScrollPane2.setViewportView(mostrar);
+
+        getContentPane().add(jScrollPane2);
+        jScrollPane2.setBounds(410, 30, 390, 440);
 
         jMenu1.setText("Cifras");
 
@@ -169,20 +168,6 @@ public class VisualizarCifras extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
-        Connection con = Conexao.AbrirConexao();
-        CifrasDAO sql = new CifrasDAO(con);
-        List<Cifras> lista = new ArrayList<>();
-        String usuario = usu.getText();
-        lista = sql.ListarCombo(usuario);
-        jComboBox1.addItem("");
-        
-        for (Cifras b : lista) {
-            jComboBox1.addItem(b.getNomeMusica());
-        }
-        Conexao.FecharConexao((com.mysql.jdbc.Connection) con);
-    }//GEN-LAST:event_btnOkActionPerformed
-
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         new rmCifra().setVisible(true);
         dispose();
@@ -246,8 +231,6 @@ public class VisualizarCifras extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnOk;
-    private javax.swing.JLabel confirm;
     private javax.swing.JLabel confirmS;
     private javax.swing.JLabel fundo;
     private javax.swing.JComboBox<String> jComboBox1;
@@ -261,6 +244,5 @@ public class VisualizarCifras extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea mostrar;
-    private javax.swing.JTextField usu;
     // End of variables declaration//GEN-END:variables
 }

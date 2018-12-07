@@ -1,11 +1,15 @@
-package Views.Visualizar;
+package Views.Consultar;
 
-import Views.Cadastro.CadastroCifras;
+import DAO.CifrasDAO;
+import DAO.Conexao;
+import Models.Cifras;
+import Views.Cadastrar.CadastroCifras;
 import Views.Excluir.rmCifra;
-import java.io.BufferedReader;
+import Views.Visualizar.VisualizarCifras;
 import java.io.File;
-import java.io.FileReader;
-import javax.swing.JOptionPane;
+import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import main.Login;
 
@@ -13,92 +17,64 @@ public class TelaCifras extends javax.swing.JFrame {
 
     public TelaCifras() {
         initComponents();
-        setSize(842,569);
+        setSize(841, 460);
         setLocationRelativeTo(this);
         setTitle("Visualizar cifras");
+        AtualizaTable();
     }
-       
 
-    
+    private void AtualizaTable() {
+        String home = System.getProperty("user.home");
+        try {
+            File file = new File(home+"/User");
+            File afile[] = file.listFiles();
+            int i = 0;
+            
+            for (int j = afile.length; i < j; i++) {
+                File arquivos = afile[i];
+                String nome = arquivos.getName();
+                String usuario = nome.substring(0, nome.length()-4);
+                    
+                    Connection con = Conexao.AbrirConexao();
+                    CifrasDAO bd = new CifrasDAO(con);
+                    List<Cifras> lista = new ArrayList<>();
+                    lista = bd.ListarCifras(usuario);
+                    DefaultTableModel tbm = (DefaultTableModel) jTable.getModel();
+
+                    while (tbm.getRowCount() > 0) {
+                        tbm.removeRow(0);
+                    }
+
+                    int ii = 0;
+                    for (Cifras tab : lista) {
+                        tbm.addRow(new String[ii]);
+                        jTable.setValueAt(tab.getIdCifra(), ii, 0);
+                        jTable.setValueAt(tab.getNomeMusica(), ii, 1);
+                        jTable.setValueAt(tab.getNomeCantor(), ii, 2);
+                        jTable.setValueAt(tab.getTom(), ii, 3);
+                        ii++;
+                    }
+                    Conexao.FecharConexao((com.mysql.jdbc.Connection) con);
+            }
+        } catch (Exception e) {
+        }
+        
+        
+    }
+
     String home = System.getProperty("user.home");
         
-        public void Lista() {                  
-        String Usu = confirmUsu.getText().toUpperCase();
-        String Pass = confirmSen.getText();
-        if(Usu.equals("") || Pass.equals("")){
-            JOptionPane.showConfirmDialog(null, "Preencha todos os campos!","Aviso!",JOptionPane.CLOSED_OPTION);
-        } else {
-                     
-        String caminhoU = (home+"/Documents/DADOS/"+Usu+"/");
-        String caminhoS = (home+"/Documents/DADOS/"+Usu+"/senha.txt");
-        
-        File path = new File(caminhoU);
-        
-        if(path.exists()){
-            File sen = new File(caminhoS);
-            try {         
-            FileReader fr = new FileReader(sen);
-            BufferedReader br = new BufferedReader(fr);
-            String Senha = br.readLine();
-                
-                if (Senha.equals(Pass)) {
-            
-                                       
-        }       
-                fr.close();
-                br.close();
-            } catch (Exception e) {
-                
-            }
-            
-        File pastac = new File(home+"/Documents/DADOS/"+Usu+"/");
-        
-        File file[] = pastac.listFiles();
-        String text = "";
-        
-        for (int i = 0; i < file.length; i++) {
-            File f = file[i];
-            text += f.getName()+"\n";
-                
-            try {
-                FileReader fr1 = new FileReader(file[i]);
-                BufferedReader br1 = new BufferedReader(fr1);
-                String linha;
-                
-                do {                    
-                    linha = br1.readLine();
-                    if (linha != null) {
-                        String[] word = linha.split(";");
-                        
-                        DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
-                        Object[] dados = {word[1]+" - "+word[0]};
-                        table.addRow(dados);
-                    }
-                } while (linha != null); 
-                fr1.close();
-                br1.close();
-            } catch (Exception e) {
-            }
-        
-        }
-
-        }
-        }
-        confirmUsu.setText("");
-        confirmSen.setText("");
-    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        confirmSen = new javax.swing.JPasswordField();
         btnOk = new javax.swing.JButton();
-        confirmS = new javax.swing.JLabel();
-        confirmUsu = new javax.swing.JTextField();
+        pesqNome = new javax.swing.JTextField();
         confirm = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTable = new javax.swing.JTable();
         fundo = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -111,59 +87,67 @@ public class TelaCifras extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
         getContentPane().setLayout(null);
-        getContentPane().add(confirmSen);
-        confirmSen.setBounds(510, 60, 200, 30);
 
         btnOk.setFont(new java.awt.Font("Yu Gothic Medium", 0, 14)); // NOI18N
-        btnOk.setText("OK");
+        btnOk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icone-de-pesquisa-png.png"))); // NOI18N
         btnOk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOkActionPerformed(evt);
             }
         });
         getContentPane().add(btnOk);
-        btnOk.setBounds(720, 30, 110, 50);
+        btnOk.setBounds(480, 10, 90, 50);
 
-        confirmS.setFont(new java.awt.Font("Yu Gothic Medium", 0, 13)); // NOI18N
-        confirmS.setText("Cofirmar senha:");
-        getContentPane().add(confirmS);
-        confirmS.setBounds(390, 60, 110, 30);
-        getContentPane().add(confirmUsu);
-        confirmUsu.setBounds(510, 20, 200, 30);
+        pesqNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pesqNomeActionPerformed(evt);
+            }
+        });
+        getContentPane().add(pesqNome);
+        pesqNome.setBounds(210, 20, 240, 30);
 
         confirm.setFont(new java.awt.Font("Yu Gothic Medium", 0, 13)); // NOI18N
-        confirm.setText("Cofirmar usuário:");
+        confirm.setText("Pesquisar por nome:");
         getContentPane().add(confirm);
-        confirm.setBounds(390, 20, 110, 30);
+        confirm.setBounds(70, 20, 140, 30);
 
-        jTable1.setFont(new java.awt.Font("Tw Cen MT", 1, 12)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTable.setFont(new java.awt.Font("Tw Cen MT", 1, 12)); // NOI18N
+        jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "SUAS CIFRAS:"
+                "Código", "Música", "Cantor", "Tom"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
+        jScrollPane1.setViewportView(jTable);
+        if (jTable.getColumnModel().getColumnCount() > 0) {
+            jTable.getColumnModel().getColumn(0).setResizable(false);
         }
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(490, 110, 330, 280);
+        jScrollPane1.setBounds(20, 70, 810, 260);
 
-        fundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/robo.jpg"))); // NOI18N
+        fundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/237908610025212.png"))); // NOI18N
         getContentPane().add(fundo);
-        fundo.setBounds(0, 0, 840, 530);
+        fundo.setBounds(290, 330, 300, 80);
+
+        jButton1.setText("Todos");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1);
+        jButton1.setBounds(650, 20, 65, 32);
 
         jMenu1.setText("Cifras");
 
@@ -229,7 +213,44 @@ public class TelaCifras extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
-        Lista();
+        String home = System.getProperty("user.home");
+        try {
+            File file = new File(home+"/User");
+            File afile[] = file.listFiles();
+            int i = 0;
+            
+            for (int j = afile.length; i < j; i++) {
+                    File arquivos = afile[i];
+                    String nome = arquivos.getName();
+                    String usuario = nome.substring(0, nome.length()-4);
+                    
+                String pesquisarNome = pesqNome.getText();
+        
+                Connection con = Conexao.AbrirConexao();
+                CifrasDAO bd = new CifrasDAO(con);
+                List<Cifras> lista = new ArrayList<>();
+                lista = bd.Pesquisar_Nome_Cifras(usuario,pesquisarNome); 
+                DefaultTableModel tbm = (DefaultTableModel) jTable.getModel();
+
+                while (tbm.getRowCount() > 0) {
+                    tbm.removeRow(0);
+                }
+
+                int ii = 0;
+                for (Cifras tab : lista) {
+                    tbm.addRow(new String[ii]);
+                    jTable.setValueAt(tab.getIdCifra(), ii, 0);
+                    jTable.setValueAt(tab.getNomeMusica(), ii, 1);
+                    jTable.setValueAt(tab.getNomeCantor(), ii, 2);
+                    jTable.setValueAt(tab.getTom(), ii, 3);
+                    ii++;
+                }
+                pesqNome.setText("");
+                Conexao.FecharConexao((com.mysql.jdbc.Connection) con);
+                    
+            }
+        } catch (Exception e) {
+        }       
     }//GEN-LAST:event_btnOkActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
@@ -245,6 +266,14 @@ public class TelaCifras extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void pesqNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesqNomeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pesqNomeActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    AtualizaTable();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     public static void main(String args[]) {
@@ -282,10 +311,8 @@ public class TelaCifras extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnOk;
     private javax.swing.JLabel confirm;
-    private javax.swing.JLabel confirmS;
-    private javax.swing.JPasswordField confirmSen;
-    private javax.swing.JTextField confirmUsu;
     private javax.swing.JLabel fundo;
+    private javax.swing.JButton jButton1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
@@ -295,6 +322,7 @@ public class TelaCifras extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable;
+    private javax.swing.JTextField pesqNome;
     // End of variables declaration//GEN-END:variables
 }

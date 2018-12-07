@@ -1,4 +1,4 @@
-package Views.Cadastro;
+package Views.Cadastrar;
 
 import DAO.Conexao;
 import DAO.UsuarioDAO;
@@ -34,9 +34,6 @@ public class CadastrarUsuario extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         titulo = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        sn1 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
-        tfFoto = new javax.swing.JTextField();
         jTF_Senha = new javax.swing.JPasswordField();
         jTF_Email = new javax.swing.JTextField();
         jTF_Nome = new javax.swing.JTextField();
@@ -79,36 +76,17 @@ public class CadastrarUsuario extends javax.swing.JFrame {
         getContentPane().add(jButton1);
         jButton1.setBounds(510, 380, 160, 60);
 
-        sn1.setBackground(new java.awt.Color(0, 255, 204));
-        sn1.setFont(new java.awt.Font("Ravie", 0, 18)); // NOI18N
-        sn1.setForeground(new java.awt.Color(0, 255, 0));
-        sn1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        sn1.setText("Foto:");
-        getContentPane().add(sn1);
-        sn1.setBounds(190, 300, 200, 30);
-
-        jButton3.setText("OK");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton3);
-        jButton3.setBounds(660, 300, 60, 32);
-        getContentPane().add(tfFoto);
-        tfFoto.setBounds(410, 300, 230, 30);
-
         jTF_Senha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTF_SenhaActionPerformed(evt);
             }
         });
         getContentPane().add(jTF_Senha);
-        jTF_Senha.setBounds(410, 250, 230, 30);
+        jTF_Senha.setBounds(410, 280, 230, 30);
         getContentPane().add(jTF_Email);
-        jTF_Email.setBounds(410, 200, 230, 30);
+        jTF_Email.setBounds(410, 230, 230, 30);
         getContentPane().add(jTF_Nome);
-        jTF_Nome.setBounds(410, 150, 230, 30);
+        jTF_Nome.setBounds(410, 180, 230, 30);
 
         sn.setBackground(new java.awt.Color(0, 255, 204));
         sn.setFont(new java.awt.Font("Ravie", 0, 18)); // NOI18N
@@ -116,7 +94,7 @@ public class CadastrarUsuario extends javax.swing.JFrame {
         sn.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         sn.setText("E-mail:");
         getContentPane().add(sn);
-        sn.setBounds(190, 200, 200, 30);
+        sn.setBounds(190, 230, 200, 30);
 
         n.setBackground(new java.awt.Color(0, 255, 204));
         n.setFont(new java.awt.Font("Ravie", 0, 18)); // NOI18N
@@ -124,7 +102,7 @@ public class CadastrarUsuario extends javax.swing.JFrame {
         n.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         n.setText("Nome (usuário):");
         getContentPane().add(n);
-        n.setBounds(190, 150, 190, 30);
+        n.setBounds(190, 180, 190, 30);
 
         s.setBackground(new java.awt.Color(0, 255, 204));
         s.setFont(new java.awt.Font("Ravie", 0, 18)); // NOI18N
@@ -132,7 +110,7 @@ public class CadastrarUsuario extends javax.swing.JFrame {
         s.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         s.setText("Senha:");
         getContentPane().add(s);
-        s.setBounds(190, 250, 200, 30);
+        s.setBounds(190, 280, 200, 30);
 
         fundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/guitar-2222350_960_720.jpg"))); // NOI18N
         getContentPane().add(fundo);
@@ -145,9 +123,7 @@ public class CadastrarUsuario extends javax.swing.JFrame {
     String nome = jTF_Nome.getText();
     String email = jTF_Email.getText();
     String senha = jTF_Senha.getText();
-    String foto = tfFoto.getText();
-
-        if (nome.equals("") || email.equals("") || senha.equals("") || foto.equals("")) {
+        if (nome.equals("") || email.equals("") || senha.equals("")) {
             JOptionPane.showMessageDialog(null, "Nenhum campo pode estar vazio!", 
                     "Projeto Cifras", JOptionPane.WARNING_MESSAGE);
         } else {
@@ -158,7 +134,6 @@ public class CadastrarUsuario extends javax.swing.JFrame {
             a.setNome(nome);
             a.setEmail(email);
             a.setSenha(senha);
-            a.setImg(foto);
             
             sql.Cadastro_Usuario(a);
             Conexao.FecharConexao((com.mysql.jdbc.Connection) con);
@@ -166,7 +141,6 @@ public class CadastrarUsuario extends javax.swing.JFrame {
     jTF_Nome.setText("");
     jTF_Email.setText("");
     jTF_Senha.setText("");
-    tfFoto.setText("");
     
     JOptionPane.showMessageDialog(null, "Cadastro finalizado com sucesso!",
             "Projeto Cifras", JOptionPane.INFORMATION_MESSAGE);            
@@ -180,18 +154,6 @@ public class CadastrarUsuario extends javax.swing.JFrame {
         new Login().setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        try {
-            JFileChooser foto = new JFileChooser();
-            foto.setCurrentDirectory(new File("C:/Proj_Cifras/"));
-            foto.setDialogTitle("Carregar Capa");
-            foto.showOpenDialog(this);
-            String a = "" + foto.getSelectedFile().getName();
-            tfFoto.setText(a);
-        } catch (Exception e) {
-        }
-    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -235,15 +197,12 @@ public class CadastrarUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel fundo;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JTextField jTF_Email;
     private javax.swing.JTextField jTF_Nome;
     private javax.swing.JPasswordField jTF_Senha;
     private javax.swing.JLabel n;
     private javax.swing.JLabel s;
     private javax.swing.JLabel sn;
-    private javax.swing.JLabel sn1;
-    private javax.swing.JTextField tfFoto;
     private javax.swing.JLabel titulo;
     // End of variables declaration//GEN-END:variables
 }

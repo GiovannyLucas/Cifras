@@ -98,4 +98,60 @@ public class CifrasDAO extends ExecuteSQL {
             return e.getMessage();
         }
     }    
+    
+    public List<Cifras> ListarCifras(String usuario) {
+        String sql = "SELECT id,nome_musica,nome_cantor,tom FROM cifras WHERE nome_usuario = '"+ usuario +"'";
+        List<Cifras> lista = new ArrayList<>();
+            
+        try {
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs != null) {
+                while (rs.next()) {
+                    Cifras a = new Cifras();
+                    a.setIdCifra(rs.getInt(1));
+                    a.setNomeMusica(rs.getString(2));
+                    a.setNomeCantor(rs.getString(3));
+                    a.setTom(rs.getString(4));
+                    
+                    lista.add(a);
+                }
+                return lista;
+            } else {
+                return null;
+            }
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    
+    public List<Cifras> Pesquisar_Nome_Cifras(String usuario, String pesquisarNome){
+        String sql = "SELECT id,nome_musica,nome_cantor,tom FROM cifras "
+                + "WHERE nome_usuario = '"+ usuario +"' AND nome_musica LIKE '%"+ pesquisarNome +"%'";
+       
+        List<Cifras> lista = new ArrayList<>();
+            
+        try {
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs != null) {
+                while (rs.next()) {
+                    Cifras a = new Cifras();
+                    a.setIdCifra(rs.getInt(1));
+                    a.setNomeMusica(rs.getString(2));
+                    a.setNomeCantor(rs.getString(3));
+                    a.setTom(rs.getString(4));
+                    
+                    lista.add(a);
+                }
+                return lista;
+            } else {
+                return null;
+            }
+        } catch (Exception e) {
+            return null;
+        }
+    }    
 }

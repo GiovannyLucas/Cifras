@@ -2,10 +2,11 @@ package main;
 
 import DAO.Conexao;
 import DAO.UsuarioDAO;
-import Views.Cadastro.CadastrarUsuario;
-import Views.Visualizar.TelaCifras;
+import Views.Cadastrar.CadastrarUsuario;
+import Views.Consultar.TelaCifras;
+import java.io.BufferedWriter;
 import java.io.File;
-import java.nio.file.Files;
+import java.io.FileWriter;
 import java.sql.Connection;
 import javax.swing.JOptionPane;
 
@@ -26,9 +27,11 @@ public class Login extends javax.swing.JFrame {
     
     public void criarPasta(){
         String home = System.getProperty("user.home");
-        File pasta = new File(home+"/Imagens");
-        if (!pasta.exists()) {
-            pasta.mkdir();
+        File pastaImg = new File(home+"/Imagens");
+        File pastaUser = new File(home+"/User");
+        if (!pastaImg.exists() || !pastaUser.exists()) {
+            pastaImg.mkdir();
+            pastaUser.mkdir();
         }
     }
     
@@ -139,6 +142,21 @@ public class Login extends javax.swing.JFrame {
             passLog.setText("");
         } else {
             if (sql.Logar(nome, senha) == true) {
+                
+                String home = System.getProperty("user.home");
+                File pastaUsu = new File(home+"/User/"+ nome +".txt");
+                
+                try {
+                    
+                    if (!pastaUsu.exists()) {
+                        pastaUsu.createNewFile();
+                    }
+                    
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Erro ao criar cookie.", "Projeto Cifras",
+                            JOptionPane.ERROR_MESSAGE);
+                }
+                
                 new Thread(){
                     public void run() {
                         for (int i = 0; i < 101; i++) {

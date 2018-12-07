@@ -16,7 +16,7 @@ public class Conexao {
                 String url = "jdbc:mysql://localhost/proj_cifras";
                 con = (Connection) DriverManager.getConnection(url, "root", "");
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Erro na conexão com o banco", "Video Locadora", 
+                JOptionPane.showMessageDialog(null, "Erro na conexão com o banco", "Projeto Locadora", 
                         JOptionPane.ERROR_MESSAGE);
                 e.getMessage();
             }

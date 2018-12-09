@@ -1,5 +1,6 @@
-package Views.Cadastrar;
+package Views.Update;
 
+import Views.Cadastrar.*;
 import DAO.CifrasDAO;
 import DAO.Conexao;
 import DAO.UsuarioDAO;
@@ -12,15 +13,34 @@ import Views.Consultar.VisualizarCifras;
 import Views.Excluir.rmCifra;
 import java.io.File;
 import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
 
-public class CadastroCifras extends javax.swing.JFrame {
+public class AlterarCifras extends javax.swing.JFrame {
 
 
-    public CadastroCifras() {
+    public AlterarCifras() {
         initComponents();
         setSize(852, 572);
         setLocationRelativeTo(this);  
-        setTitle("Cadastrar cifras");
+        setTitle("Atualizar cifras");
+    }
+    
+    private void InserirDados(int id){
+        Connection con = Conexao.AbrirConexao();
+        CifrasDAO sql = new CifrasDAO(con);
+        List<Cifras> lista = new ArrayList<>();
+        lista = sql.CapturarCifra(id);
+        
+        for (Cifras a : lista) {
+            codCifra.setText("" + a.getIdCifra());
+            NomeMusica.setText("" + a.getNomeMusica());
+            NomeCantor.setText("" + a.getNomeCantor());
+            tomM.setText("" + a.getTom());
+            cifra.setText("" + a.getCifra()); 
+        }
+        
+        Conexao.FecharConexao((com.mysql.jdbc.Connection) con);
     }
     
     /**
@@ -32,27 +52,30 @@ public class CadastroCifras extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel10 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         ok = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         tomM = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        cantorM = new javax.swing.JTextField();
+        NomeCantor = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        nomeM = new javax.swing.JTextField();
+        NomeMusica = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         cifra = new javax.swing.JTextArea();
+        jLabel9 = new javax.swing.JLabel();
+        codCifra = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        idCifra1 = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
         fundo = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -61,30 +84,15 @@ public class CadastroCifras extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(null);
 
-        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel10.setText("*");
-        getContentPane().add(jLabel10);
-        jLabel10.setBounds(530, 140, 10, 14);
-
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel8.setText("*");
-        getContentPane().add(jLabel8);
-        jLabel8.setBounds(520, 180, 10, 14);
-
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel7.setText("*");
-        getContentPane().add(jLabel7);
-        jLabel7.setBounds(580, 100, 10, 14);
-
         ok.setFont(new java.awt.Font("Yu Gothic Medium", 0, 14)); // NOI18N
-        ok.setText("Cadastrar!");
+        ok.setText("Atualizar!");
         ok.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 okActionPerformed(evt);
             }
         });
         getContentPane().add(ok);
-        ok.setBounds(570, 460, 130, 50);
+        ok.setBounds(140, 410, 130, 50);
 
         jLabel6.setText("Img by: Jocals");
         getContentPane().add(jLabel6);
@@ -93,42 +101,73 @@ public class CadastroCifras extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Yu Gothic Medium", 0, 11)); // NOI18N
         jLabel5.setText("CIFRA:");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(420, 230, 60, 30);
+        jLabel5.setBounds(380, 90, 60, 30);
         getContentPane().add(tomM);
-        tomM.setBounds(590, 180, 210, 30);
+        tomM.setBounds(150, 340, 210, 30);
 
         jLabel4.setFont(new java.awt.Font("Yu Gothic Medium", 0, 11)); // NOI18N
         jLabel4.setText("TOM:");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(470, 180, 110, 30);
-        getContentPane().add(cantorM);
-        cantorM.setBounds(590, 140, 210, 30);
+        jLabel4.setBounds(30, 340, 110, 30);
+        getContentPane().add(NomeCantor);
+        NomeCantor.setBounds(150, 300, 210, 30);
 
         jLabel3.setFont(new java.awt.Font("Yu Gothic Medium", 0, 11)); // NOI18N
         jLabel3.setText("CANTOR:");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(470, 140, 110, 30);
-        getContentPane().add(nomeM);
-        nomeM.setBounds(590, 100, 210, 30);
+        jLabel3.setBounds(30, 300, 110, 30);
+        getContentPane().add(NomeMusica);
+        NomeMusica.setBounds(150, 260, 210, 30);
 
         jLabel2.setFont(new java.awt.Font("Yu Gothic Medium", 0, 12)); // NOI18N
-        jLabel2.setText("NOME DA MÚSICA:");
+        jLabel2.setText("CÓDIGO DA CIFRA:");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(470, 100, 110, 30);
+        jLabel2.setBounds(30, 220, 110, 30);
 
         jLabel1.setFont(new java.awt.Font("Yu Gothic Medium", 1, 28)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("CADASTRE SUAS CIFRAS!");
+        jLabel1.setText("ATUALIZAR SUAS CIFRAS!");
         jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(400, 30, 410, 50);
+        jLabel1.setBounds(210, 20, 410, 50);
 
         cifra.setColumns(20);
         cifra.setRows(5);
         jScrollPane1.setViewportView(cifra);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(473, 220, 330, 230);
+        jScrollPane1.setBounds(423, 90, 380, 420);
+
+        jLabel9.setFont(new java.awt.Font("Yu Gothic Medium", 0, 12)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel9.setText("DIGITE O CÓDIGO DA CIFRA:");
+        getContentPane().add(jLabel9);
+        jLabel9.setBounds(30, 150, 180, 30);
+
+        codCifra.setEditable(false);
+        codCifra.setBackground(new java.awt.Color(204, 255, 255));
+        codCifra.setForeground(new java.awt.Color(0, 0, 0));
+        getContentPane().add(codCifra);
+        codCifra.setBounds(150, 220, 80, 30);
+
+        jButton1.setText("OK");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1);
+        jButton1.setBounds(300, 150, 60, 32);
+
+        idCifra1.setBackground(new java.awt.Color(204, 255, 255));
+        idCifra1.setForeground(new java.awt.Color(0, 0, 0));
+        getContentPane().add(idCifra1);
+        idCifra1.setBounds(210, 150, 80, 30);
+
+        jLabel7.setFont(new java.awt.Font("Yu Gothic Medium", 0, 12)); // NOI18N
+        jLabel7.setText("NOME DA MÚSICA:");
+        getContentPane().add(jLabel7);
+        jLabel7.setBounds(30, 260, 110, 30);
 
         fundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/robo.jpg"))); // NOI18N
         getContentPane().add(fundo);
@@ -159,6 +198,14 @@ public class CadastroCifras extends javax.swing.JFrame {
             }
         });
         jMenu1.add(jMenuItem4);
+
+        jMenuItem6.setText("Alterar cifra");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem6);
 
         jMenuItem5.setText("Ver cifra - Toque junto!");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
@@ -193,6 +240,8 @@ public class CadastroCifras extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        Fazer o sair
+        
         new Login().setVisible(true);
         dispose();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
@@ -213,66 +262,66 @@ public class CadastroCifras extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okActionPerformed
-        String home = System.getProperty("user.home");
-        try {
-            File file = new File(home+"/User");
-            File afile[] = file.listFiles();
-            int i = 0;
+    String idCifra = codCifra.getText();
+    String nomeMusica = NomeMusica.getText();
+    String nomeCantor = NomeCantor.getText();
+    String tom = tomM.getText();
+    String cifraCompleta = cifra.getText();
+    
+    if (nomeMusica.equals("") || nomeCantor.equals("") || tom.equals("") || cifraCompleta.equals("")) {
+        JOptionPane.showMessageDialog(null, "Nenhum campo pode estar vazio!",
+                    "Projeto Cifras", JOptionPane.WARNING_MESSAGE);
+    } else {
+        Connection con = Conexao.AbrirConexao();
+        CifrasDAO sql = new CifrasDAO(con);
+        int id = Integer.parseInt(idCifra);
+        Cifras a = new Cifras();
+        
+        a.setNomeMusica(nomeMusica);
+        a.setNomeCantor(nomeCantor);
+        a.setTom(tom);
+        a.setCifra(cifraCompleta);
+        a.setIdCifra(id);
+        
+        sql.Alterar_Cifra(a);
+        Conexao.FecharConexao((com.mysql.jdbc.Connection) con);
 
-            for (int j = afile.length; i < j; i++) {
-                File arquivos = afile[i];
-                String nome = arquivos.getName();
-                String usuario = nome.substring(0, nome.length()-4);
-
-                String nomeUsuario = usuario;
-                String nomeMusica = nomeM.getText();
-                String cantor = cantorM.getText();
-                String tom = tomM.getText();
-                String cifraMusica = cifra.getText();
-
-                if (nomeMusica.equals("") || cantor.equals("") || tom.equals("") || cifraMusica.equals("")
-                    || nomeUsuario.equals("")) {
-                    JOptionPane.showMessageDialog(null, "Nenhum campo pode estar vazio!",
-                        "Projeto Cifras", JOptionPane.WARNING_MESSAGE);
-                } else {
-                    Connection con = Conexao.AbrirConexao();
-                    UsuarioDAO u = new UsuarioDAO(con);
-                    Usuario usu = new Usuario();
-                    CifrasDAO sql = new CifrasDAO(con);
-                    Cifras a = new Cifras();
-
-                    usu.setNome(nomeUsuario);
-                    u.VerificaLogin(nomeUsuario);
-
-                    if (u.VerificaLogin(nomeUsuario) == true) {
-                        a.setNomeUsuario(nomeUsuario);
-                        a.setNomeMusica(nomeMusica);
-                        a.setNomeCantor(cantor);
-                        a.setTom(tom);
-                        a.setCifra(cifraMusica);
-
-                        sql.Cadastro_Cifra(a);
-
-                        JOptionPane.showMessageDialog(null, "Cadastro finalizado com sucesso!",
-                            "Projeto Cifras", JOptionPane.INFORMATION_MESSAGE);
-
-                        nomeM.setText("");
-                        cantorM.setText("");
-                        tomM.setText("");
-                        cifra.setText("");
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Usuário incorreto!",
-                            "Projeto Cifras", JOptionPane.WARNING_MESSAGE);
-                    }
-                    Conexao.FecharConexao((com.mysql.jdbc.Connection) con);
-                }
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao criar cookie!",
-                            "Projeto Cifras", JOptionPane.ERROR_MESSAGE);
-        }
-
+        codCifra.setText("");
+        NomeMusica.setText("");
+        NomeCantor.setText("");
+        tomM.setText("");
+        cifra.setText("");  
+        
+        JOptionPane.showMessageDialog(null, "Update realizado com sucesso!",
+                    "Projeto Cifras", JOptionPane.INFORMATION_MESSAGE);
+  
+    }        
     }//GEN-LAST:event_okActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    String id_Cifra = idCifra1.getText();
+    Connection con = Conexao.AbrirConexao();
+    CifrasDAO sql = new CifrasDAO(con);
+    int id = Integer.parseInt(id_Cifra);
+    
+        if (id_Cifra.equals("")) {
+            JOptionPane.showMessageDialog(null, "Digite um código para atualizar",
+                        "Projeto Cifras", JOptionPane.WARNING_MESSAGE);
+        }
+            codCifra.setText("");
+            NomeMusica.setText("");
+            NomeCantor.setText("");
+            tomM.setText("");
+            cifra.setText("");  
+            
+    InserirDados(id);
+    idCifra1.setText("");
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        new AlterarCifras().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
       
     /**
      * @param args the command line arguments
@@ -291,37 +340,43 @@ public class CadastroCifras extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CadastroCifras.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AlterarCifras.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CadastroCifras.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AlterarCifras.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CadastroCifras.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AlterarCifras.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CadastroCifras.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AlterarCifras.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CadastroCifras().setVisible(true);
+                new AlterarCifras().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField cantorM;
+    private javax.swing.JTextField NomeCantor;
+    private javax.swing.JTextField NomeMusica;
     private javax.swing.JTextArea cifra;
+    private javax.swing.JTextField codCifra;
     private javax.swing.JLabel fundo;
+    private javax.swing.JTextField idCifra1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
@@ -330,8 +385,8 @@ public class CadastroCifras extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField nomeM;
     private javax.swing.JButton ok;
     private javax.swing.JTextField tomM;
     // End of variables declaration//GEN-END:variables

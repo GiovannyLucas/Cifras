@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 07-Dez-2018 às 21:02
+-- Generation Time: 09-Dez-2018 às 21:59
 -- Versão do servidor: 10.1.30-MariaDB
 -- PHP Version: 7.2.1
 
@@ -63,7 +63,7 @@ CREATE TABLE `cifras` (
 
 INSERT INTO `cifras` (`id`, `nome_usuario`, `nome_musica`, `nome_cantor`, `tom`, `cifra`) VALUES
 (3, 'Giovanny', 'Um dia', 'Gaviões', 'Cm', 's fe e s se e  a w a'),
-(5, 'Giovanny', 'Maré Viva', 'Fresno', 'G', 'Eu Sou a Maré Viva\nFresno\nCifra: Principal (teclado)   exibições\n84.019\nTom: G\n         G9\nA casa cheia, o coração vazio\n                 C9\nEscorre do meu rosto, um lamento arredio\n\n              Em7/9             D4\nO veneno acabou, a festa esvaziou\n                G5 G4       G\nO tempo da inocência terminou\n\n                  G9\nOs amigos que eu fiz, e quem jamais voltou\n                 C9\nFerida que eu abri, e a que jamais fechou\n              Em7/9                   D4\nPara passar a luz, que vence a escuridão\n                   G5 G4           G\nPra eu tentar aquecer, o meu coração');
+(5, 'Giovanny', 'Maré Viva!', 'Fresnow', 'GM', 'Eu Sou a Maré Viva\n\nFresno\n\nCifra: Principal (teclado)  \n\nTom: G\n\n         G9\nA casa cheia, o coração vazio\n                 C9\nEscorre do meu rosto, um lamento arredio\n\n              Em7/9             D4\nO veneno acabou, a festa esvaziou\n                G5 G4       G\nO tempo da inocência terminou\n\n                  G9\nOs amigos que eu fiz, e quem jamais voltou\n                 C9\nFerida que eu abri, e a que jamais fechou\n              Em7/9                   D4\nPara passar a luz, que vence a escuridão\n                   G5 G4           G\nPra eu tentar aquecer, o meu coração');
 
 -- --------------------------------------------------------
 

@@ -6,7 +6,7 @@ import Models.Cifras;
 import Views.Cadastrar.CadastroCifras;
 import Views.Excluir.rmCifra;
 import Views.Consultar.TelaCifras;
-import Views.Visualizar.VisualizarCifras;
+import Views.Consultar.VisualizarCifras;
 import java.io.File;
 import java.sql.Connection;
 import java.util.ArrayList;

@@ -5,7 +5,6 @@ import DAO.Conexao;
 import Models.Cifras;
 import Views.Cadastrar.CadastroCifras;
 import Views.Excluir.rmCifra;
-import Views.Visualizar.VisualizarCifras;
 import java.io.File;
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -17,7 +16,7 @@ public class TelaCifras extends javax.swing.JFrame {
 
     public TelaCifras() {
         initComponents();
-        setSize(841, 460);
+        setSize(857, 460);
         setLocationRelativeTo(this);
         setTitle("Visualizar cifras");
         AtualizaTable();
@@ -147,7 +146,7 @@ public class TelaCifras extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(650, 20, 65, 32);
+        jButton1.setBounds(650, 20, 80, 32);
 
         jMenu1.setText("Cifras");
 

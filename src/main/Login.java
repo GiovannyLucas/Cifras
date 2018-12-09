@@ -4,9 +4,7 @@ import DAO.Conexao;
 import DAO.UsuarioDAO;
 import Views.Cadastrar.CadastrarUsuario;
 import Views.Consultar.TelaCifras;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.sql.Connection;
 import javax.swing.JOptionPane;
 
@@ -69,7 +67,7 @@ public class Login extends javax.swing.JFrame {
         getContentPane().add(titulo);
         titulo.setBounds(130, 50, 570, 60);
 
-        jProgressBar1.setBackground(new java.awt.Color(0, 204, 0));
+        jProgressBar1.setBackground(new java.awt.Color(0, 0, 0));
         jProgressBar1.setForeground(new java.awt.Color(0, 204, 0));
         getContentPane().add(jProgressBar1);
         jProgressBar1.setBounds(150, 460, 560, 12);

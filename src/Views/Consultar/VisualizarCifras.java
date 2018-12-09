@@ -1,4 +1,4 @@
-package Views.Visualizar;
+package Views.Consultar;
 
 import DAO.CifrasDAO;
 import DAO.Conexao;
@@ -82,7 +82,7 @@ public class VisualizarCifras extends javax.swing.JFrame {
         getContentPane().add(confirmS);
         confirmS.setBounds(100, 30, 220, 30);
 
-        jComboBox1.setFont(new java.awt.Font("Exotc350 Bd BT", 1, 12)); // NOI18N
+        jComboBox1.setFont(new java.awt.Font("Exotc350 Bd BT", 1, 18)); // NOI18N
         jComboBox1.setToolTipText("");
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

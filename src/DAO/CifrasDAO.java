@@ -153,5 +153,52 @@ public class CifrasDAO extends ExecuteSQL {
         } catch (Exception e) {
             return null;
         }
-    }    
+    }  
+    
+    public List<Cifras> CapturarCifra(int id){
+        String sql = "SELECT id,nome_musica,nome_cantor,tom,cifra FROM cifras WHERE id = "+ id + "";
+        List<Cifras> lista = new ArrayList<>();
+        try {
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            if (rs != null) {
+                while (rs.next()) {                    
+                    Cifras a = new Cifras();
+                    a.setIdCifra(rs.getInt(1));
+                    a.setNomeMusica(rs.getString(2));
+                    a.setNomeCantor(rs.getString(3));
+                    a.setTom(rs.getString(4));
+                    a.setCifra(rs.getString(5));
+                    lista.add(a);
+                }
+                return lista;
+            } else {
+                return null;
+            }
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+    
+   public String Alterar_Cifra(Cifras a){
+        String sql = "UPDATE cifras SET nome_musica = ?, nome_cantor = ?, tom = ?,"+
+                     "cifra = ? WHERE id = ?";
+        
+        try {
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ps.setString(1, a.getNomeMusica());
+            ps.setString(2, a.getNomeCantor());
+            ps.setString(3, a.getTom());
+            ps.setString(4, a.getCifra());
+            ps.setInt(5, a.getIdCifra());
+            if (ps.executeUpdate() > 0) {
+                return "Atualizado com sucesso!";
+            } else {
+                return "Erro ao atualizar!";
+            }
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+    }
+   
 }

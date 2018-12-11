@@ -1,10 +1,13 @@
 package DAO;
 
+import Models.Cifras;
 import Models.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 public class UsuarioDAO extends ExecuteSQL {
@@ -76,4 +79,89 @@ public class UsuarioDAO extends ExecuteSQL {
         }
         return finalResult;
     }
+        
+    public List<Usuario> ListarUsuario(String usuario) {
+        String sql = "SELECT id,nome,email,senha FROM usuarios WHERE nome = '"+ usuario +"'";
+        List<Usuario> lista = new ArrayList<>();
+            
+        try {
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs != null) {
+                while (rs.next()) {
+                    Usuario a = new Usuario();
+                    a.setId(rs.getInt(1));
+                    a.setNome(rs.getString(2));
+                    a.setEmail(rs.getString(3));
+                    a.setSenha(rs.getString(4));
+                    
+                    lista.add(a);
+                }
+                return lista;
+            } else {
+                return null;
+            }
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    
+    public List<Usuario> CapturarUsuario(String usuario){
+        String sql = "SELECT * FROM usuarios WHERE nome = '"+ usuario + "'";
+        List<Usuario> lista = new ArrayList<>();
+        try {
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            if (rs != null) {
+                while (rs.next()) {                    
+                    Usuario a = new Usuario();
+                    a.setId(rs.getInt(1));
+                    a.setNome(rs.getString(2));
+                    a.setEmail(rs.getString(3));
+                    a.setSenha(rs.getString(4));
+                    lista.add(a);
+                }
+                return lista;
+            } else {
+                return null;
+            }
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+
+   public String Alterar_Usuario(Usuario a, String usuario){
+        String sql = "UPDATE usuarios SET nome = ?, email = ?, senha = ? "+
+                     "WHERE nome = '"+ usuario +"'";
+        
+        try {
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ps.setString(1, a.getNome());
+            ps.setString(2, a.getEmail());
+            ps.setString(3, a.getSenha());
+            if (ps.executeUpdate() > 0) {
+                return "Atualizado com sucesso!";
+            } else {
+                return "Erro ao atualizar!";
+            }
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+    }
+
+    public String Excluir_Usuario(String usuario){
+        String sql = "DELETE FROM usuarios WHERE nome = '"+ usuario +"'";
+        try {
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            
+            if (ps.executeUpdate() > 0) {
+                return "Excluído com sucesso!";
+            } else {
+                return "Erro ao excluir!";
+            }
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+    }    
 }

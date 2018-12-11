@@ -143,7 +143,9 @@ public class CadastrarUsuario extends javax.swing.JFrame {
     jTF_Senha.setText("");
     
     JOptionPane.showMessageDialog(null, "Cadastro finalizado com sucesso!",
-            "Projeto Cifras", JOptionPane.INFORMATION_MESSAGE);            
+            "Projeto Cifras", JOptionPane.INFORMATION_MESSAGE);    
+    new Login().setVisible(true);
+    dispose();
         } 
     }//GEN-LAST:event_jButton1ActionPerformed
 

@@ -16,23 +16,31 @@ public class Login extends javax.swing.JFrame {
         setLocationRelativeTo(this);   
         setTitle("Login");
         criarPasta();
-    }
-     
-    public void LimparCampos(){
-        nomeUsu.setText("");
-        passLog.setText("");
+        apagarUsers();
     }
     
     public void criarPasta(){
         String home = System.getProperty("user.home");
-        File pastaImg = new File(home+"/Imagens");
         File pastaUser = new File(home+"/User");
-        if (!pastaImg.exists() || !pastaUser.exists()) {
-            pastaImg.mkdir();
+        if (!pastaUser.exists()) {
             pastaUser.mkdir();
         }
     }
     
+    public void apagarUsers(){
+        String home = System.getProperty("user.home");
+            try {
+                File file = new File(home+"/User");
+                File afile[] = file.listFiles();
+                int i = 0;
+
+                for (int j = afile.length; i < j; i++) {
+                    File arquivos = afile[i];
+                    arquivos.delete();
+                }
+            } catch (Exception e) {
+            }
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -94,6 +102,7 @@ public class Login extends javax.swing.JFrame {
         getContentPane().add(jButton1);
         jButton1.setBounds(500, 280, 140, 60);
 
+        passLog.setFont(new java.awt.Font("Yu Gothic Medium", 0, 14)); // NOI18N
         passLog.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 passLogActionPerformed(evt);
@@ -101,6 +110,13 @@ public class Login extends javax.swing.JFrame {
         });
         getContentPane().add(passLog);
         passLog.setBounds(410, 220, 230, 30);
+
+        nomeUsu.setFont(new java.awt.Font("Yu Gothic Medium", 0, 14)); // NOI18N
+        nomeUsu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nomeUsuActionPerformed(evt);
+            }
+        });
         getContentPane().add(nomeUsu);
         nomeUsu.setBounds(410, 150, 230, 30);
 
@@ -186,6 +202,10 @@ public class Login extends javax.swing.JFrame {
         new CadastrarUsuario().setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void nomeUsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeUsuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nomeUsuActionPerformed
 
     /**
      * @param args the command line arguments

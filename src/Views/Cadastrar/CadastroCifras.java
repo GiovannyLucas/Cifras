@@ -7,7 +7,8 @@ import Models.Cifras;
 import Models.Usuario;
 import javax.swing.JOptionPane;
 import main.Login;
-import Views.Consultar.TelaCifras;
+import Views.Consultar.*;
+import Views.Update.*;
 import Views.Consultar.VisualizarCifras;
 import Views.Excluir.rmCifra;
 import java.io.File;
@@ -53,7 +54,11 @@ public class CadastroCifras extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuItem8 = new javax.swing.JMenuItem();
+        jMenuItem10 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
 
@@ -64,18 +69,19 @@ public class CadastroCifras extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel10.setText("*");
         getContentPane().add(jLabel10);
-        jLabel10.setBounds(530, 140, 10, 14);
+        jLabel10.setBounds(110, 180, 10, 14);
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel8.setText("*");
         getContentPane().add(jLabel8);
-        jLabel8.setBounds(520, 180, 10, 14);
+        jLabel8.setBounds(100, 250, 10, 14);
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel7.setText("*");
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(580, 100, 10, 14);
+        jLabel7.setBounds(160, 120, 10, 14);
 
+        ok.setBackground(new java.awt.Color(51, 255, 0));
         ok.setFont(new java.awt.Font("Yu Gothic Medium", 0, 14)); // NOI18N
         ok.setText("Cadastrar!");
         ok.addActionListener(new java.awt.event.ActionListener() {
@@ -84,7 +90,7 @@ public class CadastroCifras extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ok);
-        ok.setBounds(570, 460, 130, 50);
+        ok.setBounds(190, 390, 130, 50);
 
         jLabel6.setText("Img by: Jocals");
         getContentPane().add(jLabel6);
@@ -93,42 +99,42 @@ public class CadastroCifras extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Yu Gothic Medium", 0, 11)); // NOI18N
         jLabel5.setText("CIFRA:");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(420, 230, 60, 30);
+        jLabel5.setBounds(400, 120, 60, 30);
         getContentPane().add(tomM);
-        tomM.setBounds(590, 180, 210, 30);
+        tomM.setBounds(170, 250, 210, 30);
 
         jLabel4.setFont(new java.awt.Font("Yu Gothic Medium", 0, 11)); // NOI18N
         jLabel4.setText("TOM:");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(470, 180, 110, 30);
+        jLabel4.setBounds(50, 250, 110, 30);
         getContentPane().add(cantorM);
-        cantorM.setBounds(590, 140, 210, 30);
+        cantorM.setBounds(170, 180, 210, 30);
 
         jLabel3.setFont(new java.awt.Font("Yu Gothic Medium", 0, 11)); // NOI18N
         jLabel3.setText("CANTOR:");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(470, 140, 110, 30);
+        jLabel3.setBounds(50, 180, 110, 30);
         getContentPane().add(nomeM);
-        nomeM.setBounds(590, 100, 210, 30);
+        nomeM.setBounds(170, 120, 210, 30);
 
         jLabel2.setFont(new java.awt.Font("Yu Gothic Medium", 0, 12)); // NOI18N
         jLabel2.setText("NOME DA MÚSICA:");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(470, 100, 110, 30);
+        jLabel2.setBounds(50, 120, 110, 30);
 
         jLabel1.setFont(new java.awt.Font("Yu Gothic Medium", 1, 28)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("CADASTRE SUAS CIFRAS!");
         jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(400, 30, 410, 50);
+        jLabel1.setBounds(200, 30, 410, 50);
 
         cifra.setColumns(20);
         cifra.setRows(5);
         jScrollPane1.setViewportView(cifra);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(473, 220, 330, 230);
+        jScrollPane1.setBounds(443, 110, 360, 390);
 
         fundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/robo.jpg"))); // NOI18N
         getContentPane().add(fundo);
@@ -136,6 +142,7 @@ public class CadastroCifras extends javax.swing.JFrame {
 
         jMenu1.setText("Cifras");
 
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem1.setText("Ver todas as cifras...");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -144,6 +151,7 @@ public class CadastroCifras extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem1);
 
+        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem3.setText("Cadastrar nova cifra");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -152,6 +160,7 @@ public class CadastroCifras extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem3);
 
+        jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem4.setText("Deletar cifra");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -160,6 +169,16 @@ public class CadastroCifras extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem4);
 
+        jMenuItem6.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem6.setText("Alterar cifra");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem6);
+
+        jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem5.setText("Ver cifra - Toque junto!");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -169,6 +188,26 @@ public class CadastroCifras extends javax.swing.JFrame {
         jMenu1.add(jMenuItem5);
 
         jMenuBar1.add(jMenu1);
+
+        jMenu4.setText("Sua conta");
+
+        jMenuItem8.setText("Visualizar/Alterar seus dados");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem8);
+
+        jMenuItem10.setText("Remover minha conta");
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem10);
+
+        jMenuBar1.add(jMenu4);
 
         jMenu2.setText("Sair");
 
@@ -186,31 +225,6 @@ public class CadastroCifras extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        new TelaCifras().setVisible(true);
-        dispose();
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        new Login().setVisible(true);
-        dispose();
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
-
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        new CadastroCifras().setVisible(true);
-        dispose();
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
-
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        new rmCifra().setVisible(true);
-        dispose();
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
-
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        new VisualizarCifras().setVisible(true);
-        dispose();
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okActionPerformed
         String home = System.getProperty("user.home");
@@ -273,6 +287,91 @@ public class CadastroCifras extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_okActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        new TelaCifras().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        new CadastroCifras().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        new rmCifra().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        new AlterarCifras().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        new VisualizarCifras().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        new AlterarUsuario().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+        Connection con = Conexao.AbrirConexao();
+        UsuarioDAO sql = new UsuarioDAO(con);
+
+        int b = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir sua conta?", "Projeto Cifras",
+            JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (b == 0) {
+            String home = System.getProperty("user.home");
+            try {
+                File file = new File(home+"/User");
+                File afile[] = file.listFiles();
+                int i = 0;
+
+                for (int j = afile.length; i < j; i++) {
+                    File arquivos = afile[i];
+                    String nome = arquivos.getName();
+                    String usuario = nome.substring(0, nome.length()-4);
+
+                    sql.Excluir_Usuario(usuario);
+                    Conexao.FecharConexao((com.mysql.jdbc.Connection) con);
+                    dispose();
+                    new Login().setVisible(true);
+                }
+            } catch (Exception e) {
+            }
+
+        }
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        Connection con = Conexao.AbrirConexao();
+        UsuarioDAO sql = new UsuarioDAO(con);
+
+        int b = JOptionPane.showConfirmDialog(null, "Deseja realmente sair?", "Projeto Cifras",
+            JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (b == 0) {
+            String home = System.getProperty("user.home");
+            try {
+                File file = new File(home+"/User");
+                File afile[] = file.listFiles();
+                int i = 0;
+
+                for (int j = afile.length; i < j; i++) {
+                    File arquivos = afile[i];
+                    arquivos.delete();
+
+                    new Login().setVisible(true);
+                    dispose();
+
+                }
+            } catch (Exception e) {
+            }
+        }
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
       
     /**
      * @param args the command line arguments
@@ -324,12 +423,16 @@ public class CadastroCifras extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField nomeM;
     private javax.swing.JButton ok;

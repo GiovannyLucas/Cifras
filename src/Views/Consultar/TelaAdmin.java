@@ -1,9 +1,11 @@
-package main;
+package Views.Consultar;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import javax.swing.table.DefaultTableModel;
+import main.Login;
+import main.LoginAdmin;
 
 public class TelaAdmin extends javax.swing.JFrame {
 
@@ -13,46 +15,8 @@ public class TelaAdmin extends javax.swing.JFrame {
     public TelaAdmin() {
         initComponents();
         setSize(852, 585);
-        Lista();
         setLocationRelativeTo(this); 
         setTitle("Área administrativa");        
-    }
-    String home = System.getProperty("user.home");
-    public void Lista() {
-        
-        File pasta = new File(home+"/Documents/DADOS/TODOS/");
-        File file[] = pasta.listFiles();
-        
-        for (int i = 0; i < file.length; i++) {
-            File f = file[i];
-            
-            try {
-                FileReader fr = new FileReader(file[i]);
-                BufferedReader br = new BufferedReader(fr);
-                
-                String info = br.readLine();
-                DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
-                Object[] dados = {info};
-                table.addRow(dados);
-                
-                br.close();
-                fr.close();
-            } catch (Exception e) {
-            }
-        }
-    }
-    
-    public void Apaga(String value) {
-        File arq = new File(home+"/Documents/DADOS/TODOS/"+value);
-        File pasta = new File(home+"/Documents/DADOS/"+value+"/");
-        File pass = new File(home+"/Documents/DADOS/"+value+"/senha.txt");
-        
-        if (pasta.exists()) {
-            pass.delete();
-            pasta.delete();
-            arq.delete();
-        }
-        
     }
     
     @SuppressWarnings("unchecked")
@@ -60,8 +24,6 @@ public class TelaAdmin extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
@@ -72,40 +34,18 @@ public class TelaAdmin extends javax.swing.JFrame {
 
         jButton1.setBackground(new java.awt.Color(255, 0, 0));
         jButton1.setFont(new java.awt.Font("Yu Gothic Medium", 1, 24)); // NOI18N
-        jButton1.setText("EXCLUIR");
+        jButton1.setText("Visualizar Usuários");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(540, 430, 190, 80);
-
-        jTable1.setFont(new java.awt.Font("Yu Gothic Medium", 0, 12)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "                                                  Usuários:"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(jTable1);
-
-        getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(460, 22, 350, 390);
+        jButton1.setBounds(120, 100, 310, 110);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/robo.jpg"))); // NOI18N
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(-8, 0, 840, 529);
+        jLabel1.setBounds(-8, 0, 850, 529);
 
         jMenu2.setText("Sair");
 
@@ -125,14 +65,11 @@ public class TelaAdmin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
-        String v = (String) table.getValueAt(jTable1.getSelectedRow(), jTable1.getSelectedColumn());
-        table.removeRow(jTable1.getSelectedRow());
-        Apaga(v);
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        new Login().setVisible(true);
+        new LoginAdmin().setVisible(true);
         dispose();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
@@ -177,7 +114,5 @@ public class TelaAdmin extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

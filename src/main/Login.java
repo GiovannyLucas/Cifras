@@ -22,8 +22,12 @@ public class Login extends javax.swing.JFrame {
     public void criarPasta(){
         String home = System.getProperty("user.home");
         File pastaUser = new File(home+"/User");
+        File pastaAdm = new File(home+"/Adm");
         if (!pastaUser.exists()) {
             pastaUser.mkdir();
+        }
+        if (!pastaAdm.exists()) {
+            pastaAdm.mkdir();
         }
     }
     
@@ -31,6 +35,18 @@ public class Login extends javax.swing.JFrame {
         String home = System.getProperty("user.home");
             try {
                 File file = new File(home+"/User");
+                File afile[] = file.listFiles();
+                int i = 0;
+
+                for (int j = afile.length; i < j; i++) {
+                    File arquivos = afile[i];
+                    arquivos.delete();
+                }
+            } catch (Exception e) {
+            }
+            
+            try {
+                File file = new File(home+"/Adm");
                 File afile[] = file.listFiles();
                 int i = 0;
 
@@ -163,6 +179,10 @@ public class Login extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Nenhum campo pode estar vazio!",
                     "Projeto Cifras", JOptionPane.WARNING_MESSAGE);
         } else {
+            if (nome.equals("admin") && senha.equals("admin")) {
+                new LoginAdmin().setVisible(true);
+                dispose();
+            } else 
             if (sql.Logar(nome, senha) == true) {
                 
                 String home = System.getProperty("user.home");

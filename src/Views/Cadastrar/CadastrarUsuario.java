@@ -40,6 +40,7 @@ public class CadastrarUsuario extends javax.swing.JFrame {
         sn = new javax.swing.JLabel();
         n = new javax.swing.JLabel();
         s = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
         fundo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -112,6 +113,15 @@ public class CadastrarUsuario extends javax.swing.JFrame {
         getContentPane().add(s);
         s.setBounds(190, 280, 200, 30);
 
+        jButton3.setText("Sair");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton3);
+        jButton3.setBounds(30, 450, 70, 32);
+
         fundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/guitar-2222350_960_720.jpg"))); // NOI18N
         getContentPane().add(fundo);
         fundo.setBounds(0, 0, 830, 500);
@@ -157,6 +167,10 @@ public class CadastrarUsuario extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -199,6 +213,7 @@ public class CadastrarUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel fundo;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JTextField jTF_Email;
     private javax.swing.JTextField jTF_Nome;
     private javax.swing.JPasswordField jTF_Senha;

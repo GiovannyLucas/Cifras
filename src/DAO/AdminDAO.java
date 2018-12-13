@@ -79,8 +79,8 @@ public class AdminDAO extends ExecuteSQL {
         return finalResult;
     }
         
-    public List<Usuario> ListarUsuario(String usuario) {
-        String sql = "SELECT id,nome,email,senha FROM usuarios WHERE nome = '"+ usuario +"'";
+    public List<Usuario> ListarUsuarios() {
+        String sql = "SELECT id,nome,email FROM usuarios";
         List<Usuario> lista = new ArrayList<>();
             
         try {
@@ -93,7 +93,6 @@ public class AdminDAO extends ExecuteSQL {
                     a.setId(rs.getInt(1));
                     a.setNome(rs.getString(2));
                     a.setEmail(rs.getString(3));
-                    a.setSenha(rs.getString(4));
                     
                     lista.add(a);
                 }
@@ -106,15 +105,15 @@ public class AdminDAO extends ExecuteSQL {
         }
     }
     
-    public List<Usuario> CapturarUsuario(String usuario){
-        String sql = "SELECT * FROM usuarios WHERE nome = '"+ usuario + "'";
-        List<Usuario> lista = new ArrayList<>();
+    public List<Admin> CapturarAdmin(String usuario){
+        String sql = "SELECT * FROM admin WHERE nome = '"+ usuario + "'";
+        List<Admin> lista = new ArrayList<>();
         try {
             PreparedStatement ps = getCon().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             if (rs != null) {
                 while (rs.next()) {                    
-                    Usuario a = new Usuario();
+                    Admin a = new Admin();
                     a.setId(rs.getInt(1));
                     a.setNome(rs.getString(2));
                     a.setEmail(rs.getString(3));
@@ -130,8 +129,8 @@ public class AdminDAO extends ExecuteSQL {
         }
     }
 
-   public String Alterar_Usuario(Usuario a, String usuario){
-        String sql = "UPDATE usuarios SET nome = ?, email = ?, senha = ? "+
+   public String Alterar_Admin(Admin a, String usuario){
+        String sql = "UPDATE admin SET nome = ?, email = ?, senha = ? "+
                      "WHERE nome = '"+ usuario +"'";
         
         try {

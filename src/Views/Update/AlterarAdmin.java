@@ -1,8 +1,10 @@
 package Views.Update;
 
+import DAO.AdminDAO;
 import DAO.CifrasDAO;
 import DAO.Conexao;
 import DAO.UsuarioDAO;
+import Models.Admin;
 import Models.Cifras;
 import Models.Usuario;
 import Views.Cadastrar.CadastroCifras;
@@ -15,10 +17,11 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import main.Login;
+import main.LoginAdmin;
 
-public class AlterarUsuario extends javax.swing.JFrame {
+public class AlterarAdmin extends javax.swing.JFrame {
 
-    public AlterarUsuario() {
+    public AlterarAdmin() {
         initComponents();
         setSize(842, 529);
         setLocationRelativeTo(this);  
@@ -28,11 +31,11 @@ public class AlterarUsuario extends javax.swing.JFrame {
     
     private void InserirDados(String usuario){
         Connection con = Conexao.AbrirConexao();
-        UsuarioDAO sql = new UsuarioDAO(con);
-        List<Usuario> lista = new ArrayList<>();
-        lista = sql.CapturarUsuario(usuario);
+        AdminDAO sql = new AdminDAO(con);
+        List<Admin> lista = new ArrayList<>();
+        lista = sql.CapturarAdmin(usuario);
         
-        for (Usuario a : lista) {
+        for (Admin a : lista) {
             jTF_Cod.setText("" + a.getId());
             jTF_Nome.setText("" + a.getNome());
             jTF_Email.setText("" + a.getEmail());
@@ -45,7 +48,7 @@ public class AlterarUsuario extends javax.swing.JFrame {
     public void Carregar(){
     String home = System.getProperty("user.home");
         
-        File file = new File(home+"/User");
+        File file = new File(home+"/Adm");
         File afile[] = file.listFiles();
         
         try {
@@ -86,18 +89,6 @@ public class AlterarUsuario extends javax.swing.JFrame {
         jTF_Senha2 = new javax.swing.JPasswordField();
         fundo = new javax.swing.JLabel();
         fundo1 = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
-        jMenuItem8 = new javax.swing.JMenuItem();
-        jMenuItem10 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -117,7 +108,7 @@ public class AlterarUsuario extends javax.swing.JFrame {
         jTF_Nome.setBounds(420, 190, 230, 30);
 
         sn.setBackground(new java.awt.Color(0, 255, 204));
-        sn.setFont(new java.awt.Font("Ravie", 0, 18)); // NOI18N
+        sn.setFont(new java.awt.Font("Yu Gothic Medium", 0, 24)); // NOI18N
         sn.setForeground(new java.awt.Color(0, 255, 0));
         sn.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         sn.setText("E-mail:");
@@ -125,15 +116,15 @@ public class AlterarUsuario extends javax.swing.JFrame {
         sn.setBounds(200, 250, 200, 30);
 
         n.setBackground(new java.awt.Color(0, 255, 204));
-        n.setFont(new java.awt.Font("Ravie", 0, 18)); // NOI18N
+        n.setFont(new java.awt.Font("Yu Gothic Medium", 0, 24)); // NOI18N
         n.setForeground(new java.awt.Color(0, 255, 0));
         n.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        n.setText("Nome (usuário):");
+        n.setText("Nome:");
         getContentPane().add(n);
         n.setBounds(210, 190, 190, 30);
 
         s.setBackground(new java.awt.Color(0, 255, 204));
-        s.setFont(new java.awt.Font("Ravie", 0, 18)); // NOI18N
+        s.setFont(new java.awt.Font("Yu Gothic Medium", 0, 24)); // NOI18N
         s.setForeground(new java.awt.Color(0, 255, 0));
         s.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         s.setText("Senha(antiga):");
@@ -159,7 +150,7 @@ public class AlterarUsuario extends javax.swing.JFrame {
         jButton1.setBounds(560, 410, 150, 50);
 
         n1.setBackground(new java.awt.Color(0, 255, 204));
-        n1.setFont(new java.awt.Font("Ravie", 0, 18)); // NOI18N
+        n1.setFont(new java.awt.Font("Yu Gothic Medium", 0, 24)); // NOI18N
         n1.setForeground(new java.awt.Color(0, 255, 0));
         n1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         n1.setText("Código:");
@@ -172,7 +163,7 @@ public class AlterarUsuario extends javax.swing.JFrame {
         jTF_Cod.setBounds(420, 130, 230, 30);
 
         s1.setBackground(new java.awt.Color(0, 255, 204));
-        s1.setFont(new java.awt.Font("Ravie", 0, 18)); // NOI18N
+        s1.setFont(new java.awt.Font("Yu Gothic Medium", 0, 24)); // NOI18N
         s1.setForeground(new java.awt.Color(0, 255, 0));
         s1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         s1.setText("Repita a senha:");
@@ -188,7 +179,7 @@ public class AlterarUsuario extends javax.swing.JFrame {
         jTF_Senha1.setBounds(420, 360, 230, 30);
 
         sn1.setBackground(new java.awt.Color(0, 255, 204));
-        sn1.setFont(new java.awt.Font("Ravie", 0, 18)); // NOI18N
+        sn1.setFont(new java.awt.Font("Yu Gothic Medium", 0, 24)); // NOI18N
         sn1.setForeground(new java.awt.Color(0, 255, 0));
         sn1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         sn1.setText("Senha(atual):");
@@ -211,89 +202,6 @@ public class AlterarUsuario extends javax.swing.JFrame {
         getContentPane().add(fundo1);
         fundo1.setBounds(0, 0, 640, 500);
 
-        jMenu1.setText("Cifras");
-
-        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem1.setText("Ver todas as cifras...");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuItem1);
-
-        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem3.setText("Cadastrar nova cifra");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuItem3);
-
-        jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem4.setText("Deletar cifra");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuItem4);
-
-        jMenuItem6.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem6.setText("Alterar cifra");
-        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem6ActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuItem6);
-
-        jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem5.setText("Ver cifra - Toque junto!");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuItem5);
-
-        jMenuBar1.add(jMenu1);
-
-        jMenu4.setText("Sua conta");
-
-        jMenuItem8.setText("Visualizar/Alterar seus dados");
-        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem8ActionPerformed(evt);
-            }
-        });
-        jMenu4.add(jMenuItem8);
-
-        jMenuItem10.setText("Remover minha conta");
-        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem10ActionPerformed(evt);
-            }
-        });
-        jMenu4.add(jMenuItem10);
-
-        jMenuBar1.add(jMenu4);
-
-        jMenu2.setText("Sair");
-
-        jMenuItem2.setText("Logoff...");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem2);
-
-        jMenuBar1.add(jMenu2);
-
-        setJMenuBar(jMenuBar1);
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -313,13 +221,13 @@ public class AlterarUsuario extends javax.swing.JFrame {
                     "Projeto Cifras", JOptionPane.WARNING_MESSAGE);
     } else {
         Connection con = Conexao.AbrirConexao();
-        UsuarioDAO sql = new UsuarioDAO(con);
-        Usuario a = new Usuario();
+        AdminDAO sql = new AdminDAO(con);
+        Admin a = new Admin();
         
-            if (senhaAntiga.equals(senhaConfirm)) {
+        if (senhaAntiga.equals(senhaConfirm)) {
             String home = System.getProperty("user.home");
     try {
-        File arqqq = new File(home+"/User");
+        File arqqq = new File(home+"/Adm");
         File afileee[] = arqqq.listFiles();
         int iiii = 0;
         for (int jjj = afileee.length; iiii < jjj; iiii++) {
@@ -329,7 +237,7 @@ public class AlterarUsuario extends javax.swing.JFrame {
                 
                 int ii = 0;
                 
-                File arq = new File(home+"/User");
+                File arq = new File(home+"/Adm");
                 File aarq[] = arq.listFiles();
                     
 
@@ -338,7 +246,7 @@ public class AlterarUsuario extends javax.swing.JFrame {
                             arquivos.delete();
                     }
                     
-                File pastaUsu = new File(home+"/User/"+ nome +".txt");
+                File pastaUsu = new File(home+"/Adm/"+ nome +".txt");
 
                     if (!pastaUsu.exists()) {
                         pastaUsu.createNewFile();
@@ -349,7 +257,7 @@ public class AlterarUsuario extends javax.swing.JFrame {
                         a.setNome(nome);
                         a.setEmail(email);
                         a.setSenha(senhaMudar);
-                        sql.Alterar_Usuario(a, userSuper);
+                        sql.Alterar_Admin(a, userSuper);
                         
                     jTF_Nome.setText("");
                     jTF_Email.setText("");
@@ -361,7 +269,7 @@ public class AlterarUsuario extends javax.swing.JFrame {
                                 "Projeto Cifras", JOptionPane.INFORMATION_MESSAGE);
                 
                     dispose();
-                    new AlterarUsuario().setVisible(true);
+                    new AlterarAdmin().setVisible(true);
                 
         }
     } catch (Exception e) {
@@ -379,7 +287,7 @@ public class AlterarUsuario extends javax.swing.JFrame {
                        
             String home = System.getProperty("user.home");
     try {
-        File arqqq = new File(home+"/User");
+        File arqqq = new File(home+"/Adm");
         File afileee[] = arqqq.listFiles();
         int iiii = 0;
         for (int jjj = afileee.length; iiii < jjj; iiii++) {
@@ -389,7 +297,7 @@ public class AlterarUsuario extends javax.swing.JFrame {
                 
                 int ii = 0;
                 
-                File arq = new File(home+"/User");
+                File arq = new File(home+"/Adm");
                 File aarq[] = arq.listFiles();
                     
 
@@ -398,7 +306,7 @@ public class AlterarUsuario extends javax.swing.JFrame {
                             arquivos.delete();
                     }
                     
-                File pastaUsu = new File(home+"/User/"+ nome +".txt");
+                File pastaUsu = new File(home+"/Adm/"+ nome +".txt");
 
                     if (!pastaUsu.exists()) {
                         pastaUsu.createNewFile();
@@ -409,7 +317,7 @@ public class AlterarUsuario extends javax.swing.JFrame {
                         a.setNome(nome);
                         a.setEmail(email);
                         a.setSenha(senhaAntiga);
-                        sql.Alterar_Usuario(a, userSuper);
+                        sql.Alterar_Admin(a, userSuper);
                         
                     jTF_Nome.setText("");
                     jTF_Email.setText("");
@@ -421,7 +329,7 @@ public class AlterarUsuario extends javax.swing.JFrame {
                                 "Projeto Cifras", JOptionPane.INFORMATION_MESSAGE);
                 
                     dispose();
-                    new AlterarUsuario().setVisible(true);
+                    new AlterarAdmin().setVisible(true);
                 
         }
     } catch (Exception e) {
@@ -446,91 +354,6 @@ public class AlterarUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTF_Senha2ActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        new TelaCifras().setVisible(true);
-        dispose();
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        new CadastroCifras().setVisible(true);
-        dispose();
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
-
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        new rmCifra().setVisible(true);
-        dispose();
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
-
-    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        new AlterarCifras().setVisible(true);
-        dispose();
-    }//GEN-LAST:event_jMenuItem6ActionPerformed
-
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        new VisualizarCifras().setVisible(true);
-        dispose();
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
-
-    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-        new AlterarUsuario().setVisible(true);
-        dispose();
-    }//GEN-LAST:event_jMenuItem8ActionPerformed
-
-    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
-        Connection con = Conexao.AbrirConexao();
-        UsuarioDAO sql = new UsuarioDAO(con);
-
-        int b = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir sua conta?", "Projeto Cifras",
-            JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-        if (b == 0) {
-            String home = System.getProperty("user.home");
-            try {
-                File file = new File(home+"/User");
-                File afile[] = file.listFiles();
-                int i = 0;
-
-                for (int j = afile.length; i < j; i++) {
-                    File arquivos = afile[i];
-                    String nome = arquivos.getName();
-                    String usuario = nome.substring(0, nome.length()-4);
-
-                    sql.Excluir_Usuario(usuario);
-                    Conexao.FecharConexao((com.mysql.jdbc.Connection) con);
-                    dispose();
-                    new Login().setVisible(true);
-                }
-            } catch (Exception e) {
-            }
-
-        }
-    }//GEN-LAST:event_jMenuItem10ActionPerformed
-
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-    Connection con = Conexao.AbrirConexao();
-        UsuarioDAO sql = new UsuarioDAO(con);
-
-        int b = JOptionPane.showConfirmDialog(null, "Deseja realmente sair?", "Projeto Cifras",
-            JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-        if (b == 0) {    
-            String home = System.getProperty("user.home");
-            try {
-                File file = new File(home+"/User");
-                File afile[] = file.listFiles();
-                int i = 0;
-
-                for (int j = afile.length; i < j; i++) {
-                    File arquivos = afile[i];
-                    arquivos.delete();
-
-                        new Login().setVisible(true);
-                        dispose();
-
-                }
-            } catch (Exception e) {
-        }
-        }
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -548,14 +371,30 @@ public class AlterarUsuario extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AlterarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AlterarAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AlterarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AlterarAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AlterarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AlterarAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AlterarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AlterarAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -576,7 +415,7 @@ public class AlterarUsuario extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AlterarUsuario().setVisible(true);
+                new AlterarAdmin().setVisible(true);
             }
         });
     }
@@ -586,18 +425,6 @@ public class AlterarUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel fundo1;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem10;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JTextField jTF_Cod;
     private javax.swing.JTextField jTF_Email;
     private javax.swing.JTextField jTF_Nome;

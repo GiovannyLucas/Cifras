@@ -107,6 +107,32 @@ public class UsuarioDAO extends ExecuteSQL {
         }
     }
     
+    public List<Usuario> ListarUsuarioss() {
+        String sql = "SELECT id,nome,email FROM usuarios";
+        List<Usuario> lista = new ArrayList<>();
+            
+        try {
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs != null) {
+                while (rs.next()) {
+                    Usuario a = new Usuario();
+                    a.setId(rs.getInt(1));
+                    a.setNome(rs.getString(2));
+                    a.setEmail(rs.getString(3));
+                    
+                    lista.add(a);
+                }
+                return lista;
+            } else {
+                return null;
+            }
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
     public List<Usuario> CapturarUsuario(String usuario){
         String sql = "SELECT * FROM usuarios WHERE nome = '"+ usuario + "'";
         List<Usuario> lista = new ArrayList<>();

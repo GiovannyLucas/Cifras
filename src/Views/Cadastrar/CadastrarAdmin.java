@@ -1,49 +1,42 @@
-package Views.Consultar;
+package Views.Cadastrar;
 
-import Views.Cadastrar.CadastrarAdmin;
+import DAO.AdminDAO;
+import DAO.Conexao;
+import DAO.UsuarioDAO;
+import Models.Admin;
+import Models.Usuario;
+import Views.Consultar.VisualizarCifrasAdmin;
+import Views.Consultar.VisualizarUsuariosAdmin;
 import Views.Update.AlterarAdmin;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import javax.swing.table.DefaultTableModel;
+import java.sql.Connection;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import main.Login;
 import main.LoginAdmin;
 
-public class TelaAdmin extends javax.swing.JFrame {
 
-    public TelaAdmin() {
+public class CadastrarAdmin extends javax.swing.JFrame {
+
+    public CadastrarAdmin() {
         initComponents();
-        setSize(852, 585);
-        setLocationRelativeTo(this); 
-        setTitle("Área administrativa");       
-        ImprimirNome();
+        setSize(842, 529);
+        setLocationRelativeTo(this);  
+        setTitle("Cadastro Administrador");
     }
-    
-    public void ImprimirNome(){
-        String home = System.getProperty("user.home");
-        try {
-            File file = new File(home+"/Adm");
-            File afile[] = file.listFiles();
-            int i = 0;
-            
-            for (int j = afile.length; i < j; i++) {
-                    File arquivos = afile[i];
-                    String nome = arquivos.getName();
-                    String usuario = nome.substring(0, nome.length()-4);
-                    nomeAdmin.setText(usuario);
-            }
-        } catch (Exception e) {
-        }
-    }
+        
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenuItem3 = new javax.swing.JMenuItem();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        nomeAdmin = new javax.swing.JLabel();
+        jTF_Senha = new javax.swing.JPasswordField();
+        jTF_Email = new javax.swing.JTextField();
+        jTF_Nome = new javax.swing.JTextField();
+        sn = new javax.swing.JLabel();
+        n = new javax.swing.JLabel();
+        s = new javax.swing.JLabel();
         fundo = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
@@ -55,46 +48,60 @@ public class TelaAdmin extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
 
-        jMenuItem3.setText("jMenuItem3");
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
         getContentPane().setLayout(null);
 
-        jButton1.setBackground(new java.awt.Color(0, 204, 204));
-        jButton1.setFont(new java.awt.Font("Yu Gothic Medium", 1, 24)); // NOI18N
-        jButton1.setText("Visualizar Usuários");
+        jButton1.setBackground(new java.awt.Color(51, 204, 0));
+        jButton1.setFont(new java.awt.Font("Yu Gothic Medium", 0, 18)); // NOI18N
+        jButton1.setText("CADASTRAR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(120, 290, 280, 110);
+        jButton1.setBounds(510, 360, 160, 60);
 
-        jButton2.setBackground(new java.awt.Color(0, 204, 204));
-        jButton2.setFont(new java.awt.Font("Yu Gothic Medium", 1, 24)); // NOI18N
-        jButton2.setText("Visualizar Cifras");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jTF_Senha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jTF_SenhaActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2);
-        jButton2.setBounds(490, 290, 280, 110);
+        getContentPane().add(jTF_Senha);
+        jTF_Senha.setBounds(360, 260, 230, 30);
+        getContentPane().add(jTF_Email);
+        jTF_Email.setBounds(360, 180, 230, 30);
+        getContentPane().add(jTF_Nome);
+        jTF_Nome.setBounds(360, 100, 230, 30);
 
-        jLabel2.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel2.setFont(new java.awt.Font("Yu Gothic Medium", 1, 32)); // NOI18N
-        jLabel2.setText("Bem vindo, ADM -");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(120, 200, 320, 50);
+        sn.setBackground(new java.awt.Color(0, 255, 204));
+        sn.setFont(new java.awt.Font("Ravie", 0, 18)); // NOI18N
+        sn.setForeground(new java.awt.Color(0, 255, 0));
+        sn.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        sn.setText("E-mail:");
+        getContentPane().add(sn);
+        sn.setBounds(140, 180, 200, 30);
 
-        nomeAdmin.setFont(new java.awt.Font("Yu Gothic Medium", 1, 32)); // NOI18N
-        getContentPane().add(nomeAdmin);
-        nomeAdmin.setBounds(430, 200, 260, 50);
+        n.setBackground(new java.awt.Color(0, 255, 204));
+        n.setFont(new java.awt.Font("Ravie", 0, 18)); // NOI18N
+        n.setForeground(new java.awt.Color(0, 255, 0));
+        n.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        n.setText("Nome:");
+        getContentPane().add(n);
+        n.setBounds(140, 100, 190, 30);
 
-        fundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/robo.jpg"))); // NOI18N
+        s.setBackground(new java.awt.Color(0, 255, 204));
+        s.setFont(new java.awt.Font("Ravie", 0, 18)); // NOI18N
+        s.setForeground(new java.awt.Color(0, 255, 0));
+        s.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        s.setText("Senha:");
+        getContentPane().add(s);
+        s.setBounds(140, 260, 200, 30);
+
+        fundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/notas.png"))); // NOI18N
         getContentPane().add(fundo);
-        fundo.setBounds(-8, 0, 850, 529);
+        fundo.setBounds(160, 60, 530, 310);
 
         jMenu3.setText("Opções");
 
@@ -154,32 +161,37 @@ public class TelaAdmin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        new VisualizarUsuariosAdmin().setVisible(true);
-        dispose();
+    String nome = jTF_Nome.getText();
+    String email = jTF_Email.getText();
+    String senha = jTF_Senha.getText();
+        if (nome.equals("") || email.equals("") || senha.equals("")) {
+            JOptionPane.showMessageDialog(null, "Nenhum campo pode estar vazio!", 
+                    "Projeto Cifras", JOptionPane.WARNING_MESSAGE);
+        } else {
+            Connection con = Conexao.AbrirConexao();
+            AdminDAO sql = new AdminDAO(con);
+            Admin a = new Admin();
+            
+            a.setNome(nome);
+            a.setEmail(email);
+            a.setSenha(senha);
+            
+            sql.Cadastrar_Admin(a);
+            Conexao.FecharConexao((com.mysql.jdbc.Connection) con);
+            
+    jTF_Nome.setText("");
+    jTF_Email.setText("");
+    jTF_Senha.setText("");
+    
+    JOptionPane.showMessageDialog(null, "Cadastro finalizado com sucesso!",
+            "Projeto Cifras", JOptionPane.INFORMATION_MESSAGE);    
+    
+        } 
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-    String home = System.getProperty("user.home");
-        try {
-            File file = new File(home+"/Adm");
-            File afile[] = file.listFiles();
-            int i = 0;
-            
-            for (int j = afile.length; i < j; i++) {
-                    File arquivos = afile[i];
-                    arquivos.delete();
-            }
-        } catch (Exception e) {
-        }
-        
-        new LoginAdmin().setVisible(true);
-        dispose();
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        new VisualizarCifrasAdmin().setVisible(true);
-        dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void jTF_SenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTF_SenhaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTF_SenhaActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         new VisualizarUsuariosAdmin().setVisible(true);
@@ -201,6 +213,24 @@ public class TelaAdmin extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        String home = System.getProperty("user.home");
+        try {
+            File file = new File(home+"/Adm");
+            File afile[] = file.listFiles();
+            int i = 0;
+
+            for (int j = afile.length; i < j; i++) {
+                File arquivos = afile[i];
+                arquivos.delete();
+            }
+        } catch (Exception e) {
+        }
+
+        new LoginAdmin().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -218,20 +248,27 @@ public class TelaAdmin extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastrarAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastrarAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastrarAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastrarAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaAdmin().setVisible(true);
+                new CadastrarAdmin().setVisible(true);
             }
         });
     }
@@ -239,18 +276,20 @@ public class TelaAdmin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel fundo;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JLabel nomeAdmin;
+    private javax.swing.JTextField jTF_Email;
+    private javax.swing.JTextField jTF_Nome;
+    private javax.swing.JPasswordField jTF_Senha;
+    private javax.swing.JLabel n;
+    private javax.swing.JLabel s;
+    private javax.swing.JLabel sn;
     // End of variables declaration//GEN-END:variables
 }

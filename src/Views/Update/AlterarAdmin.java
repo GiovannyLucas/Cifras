@@ -7,9 +7,12 @@ import DAO.UsuarioDAO;
 import Models.Admin;
 import Models.Cifras;
 import Models.Usuario;
+import Views.Cadastrar.CadastrarAdmin;
 import Views.Cadastrar.CadastroCifras;
 import Views.Consultar.TelaCifras;
 import Views.Consultar.VisualizarCifras;
+import Views.Consultar.VisualizarCifrasAdmin;
+import Views.Consultar.VisualizarUsuariosAdmin;
 import Views.Excluir.rmCifra;
 import java.io.File;
 import java.sql.Connection;
@@ -89,6 +92,15 @@ public class AlterarAdmin extends javax.swing.JFrame {
         jTF_Senha2 = new javax.swing.JPasswordField();
         fundo = new javax.swing.JLabel();
         fundo1 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -201,6 +213,60 @@ public class AlterarAdmin extends javax.swing.JFrame {
         fundo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/f0811ed5abd581e705ea5bf71a81ff5d.jpg"))); // NOI18N
         getContentPane().add(fundo1);
         fundo1.setBounds(0, 0, 640, 500);
+
+        jMenu3.setText("Opções");
+
+        jMenuItem1.setText("Visualizar Usuários");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem1);
+
+        jMenuItem4.setText("Visualizar Cifras");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem4);
+
+        jMenuBar1.add(jMenu3);
+
+        jMenu1.setText("Sua conta");
+
+        jMenuItem6.setText("Atualizar seus dados");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem6);
+
+        jMenuItem5.setText("Cadastrar outro ADM");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem5);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Sair");
+
+        jMenuItem2.setText("Logoff...");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem2);
+
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -354,6 +420,44 @@ public class AlterarAdmin extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTF_Senha2ActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        new VisualizarUsuariosAdmin().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        new VisualizarCifrasAdmin().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        new AlterarAdmin().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        new CadastrarAdmin().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        String home = System.getProperty("user.home");
+        try {
+            File file = new File(home+"/Adm");
+            File afile[] = file.listFiles();
+            int i = 0;
+
+            for (int j = afile.length; i < j; i++) {
+                File arquivos = afile[i];
+                arquivos.delete();
+            }
+        } catch (Exception e) {
+        }
+
+        new LoginAdmin().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -425,6 +529,15 @@ public class AlterarAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel fundo1;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JTextField jTF_Cod;
     private javax.swing.JTextField jTF_Email;
     private javax.swing.JTextField jTF_Nome;

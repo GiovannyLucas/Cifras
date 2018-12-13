@@ -38,8 +38,8 @@ public class AdminDAO extends ExecuteSQL {
         return finalResult;
     }
     
-    public String Cadastrar_Usuario(Usuario a) {
-        String sql = "INSERT INTO usuarios VALUES (0,?,?,?)";
+    public String Cadastrar_Admin(Admin a) {
+        String sql = "INSERT INTO admin VALUES (0,?,?,?)";
         try {
             PreparedStatement ps = getCon().prepareStatement(sql);
             

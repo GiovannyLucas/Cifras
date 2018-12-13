@@ -4,9 +4,10 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Giovanny%20Lucas/Documents/NetBeansProjects/Prova%20POO%20-%20Giovanny/Main/src/DAO/AdminDAO.java</file>
-            <file>file:/C:/Users/Giovanny%20Lucas/Documents/NetBeansProjects/Prova%20POO%20-%20Giovanny/Main/src/main/Main.java</file>
-            <file>file:/C:/Users/Giovanny%20Lucas/Documents/NetBeansProjects/Prova%20POO%20-%20Giovanny/Main/src/Views/Update/teste.java</file>
+            <file>file:/C:/Users/Giovanny%20Lucas/Documents/NetBeansProjects/Prova%20POO%20-%20Giovanny/Main/src/Views/Consultar/TelaCifras.java</file>
+            <file>file:/C:/Users/Giovanny%20Lucas/Documents/NetBeansProjects/Prova%20POO%20-%20Giovanny/Main/src/Views/Update/AlterarUsuario.java</file>
             <file>file:/C:/Users/Giovanny%20Lucas/Documents/NetBeansProjects/Prova%20POO%20-%20Giovanny/Main/src/main/LoginAdmin.java</file>
+            <file>file:/C:/Users/Giovanny%20Lucas/Documents/NetBeansProjects/Prova%20POO%20-%20Giovanny/Main/src/Views/Update/AlterarAdmin.java</file>
             <file>file:/C:/Users/Giovanny%20Lucas/Documents/NetBeansProjects/Prova%20POO%20-%20Giovanny/Main/src/Views/Consultar/TelaAdmin.java</file>
         </group>
     </open-files>

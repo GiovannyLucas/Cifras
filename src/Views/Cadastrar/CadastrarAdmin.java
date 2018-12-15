@@ -171,21 +171,25 @@ public class CadastrarAdmin extends javax.swing.JFrame {
             Connection con = Conexao.AbrirConexao();
             AdminDAO sql = new AdminDAO(con);
             Admin a = new Admin();
-            
-            a.setNome(nome);
-            a.setEmail(email);
-            a.setSenha(senha);
-            
-            sql.Cadastrar_Admin(a);
-            Conexao.FecharConexao((com.mysql.jdbc.Connection) con);
-            
-    jTF_Nome.setText("");
-    jTF_Email.setText("");
-    jTF_Senha.setText("");
-    
-    JOptionPane.showMessageDialog(null, "Cadastro finalizado com sucesso!",
-            "Projeto Cifras", JOptionPane.INFORMATION_MESSAGE);    
-    
+ 
+            if (sql.VerificaLogin(nome) == true) {
+                JOptionPane.showMessageDialog(null, "Administrador já cadastrado!\n(Escolha outro nome)", 
+                        "Projeto Cifras", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                a.setNome(nome);
+                a.setEmail(email);
+                a.setSenha(senha);
+
+                sql.Cadastrar_Admin(a);
+                Conexao.FecharConexao((com.mysql.jdbc.Connection) con);
+
+                jTF_Nome.setText("");
+                jTF_Email.setText("");
+                jTF_Senha.setText("");
+
+                JOptionPane.showMessageDialog(null, "Cadastro finalizado com sucesso!",
+                        "Projeto Cifras", JOptionPane.INFORMATION_MESSAGE); 
+            }
         } 
     }//GEN-LAST:event_jButton1ActionPerformed
 

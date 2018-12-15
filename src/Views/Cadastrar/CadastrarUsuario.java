@@ -141,21 +141,26 @@ public class CadastrarUsuario extends javax.swing.JFrame {
             UsuarioDAO sql = new UsuarioDAO(con);
             Usuario a = new Usuario();
             
-            a.setNome(nome);
-            a.setEmail(email);
-            a.setSenha(senha);
-            
-            sql.Cadastro_Usuario(a);
-            Conexao.FecharConexao((com.mysql.jdbc.Connection) con);
-            
-    jTF_Nome.setText("");
-    jTF_Email.setText("");
-    jTF_Senha.setText("");
-    
-    JOptionPane.showMessageDialog(null, "Cadastro finalizado com sucesso!",
-            "Projeto Cifras", JOptionPane.INFORMATION_MESSAGE);    
-    new Login().setVisible(true);
-    dispose();
+            if (sql.VerificaLogin(nome) == true) {
+                JOptionPane.showMessageDialog(null, "Usuário já cadastrado!\n(Escolha outro nome)", 
+                        "Projeto Cifras", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                a.setNome(nome);
+                a.setEmail(email);
+                a.setSenha(senha);
+
+                sql.Cadastro_Usuario(a);
+                Conexao.FecharConexao((com.mysql.jdbc.Connection) con);
+
+                jTF_Nome.setText("");
+                jTF_Email.setText("");
+                jTF_Senha.setText("");
+
+                JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!",
+                        "Projeto Cifras", JOptionPane.INFORMATION_MESSAGE);    
+                new Login().setVisible(true);
+                dispose();   
+            }
         } 
     }//GEN-LAST:event_jButton1ActionPerformed
 

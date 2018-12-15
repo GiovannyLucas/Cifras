@@ -38,7 +38,30 @@ public class UsuarioDAO extends ExecuteSQL {
         }
         return finalResult;
     }
-    
+
+        public boolean VerificarLogin(String nome){
+        boolean finalResult = false;
+        
+        try {
+            String consulta  = "SELECT nome FROM usuarios WHERE nome = '"+ nome + "'";
+            PreparedStatement ps = getCon().prepareStatement(consulta);
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs != null) {
+                while (rs.next()) {                    
+                    Usuario a = new Usuario();
+                    a.setNome(rs.getString(1));
+                    a.setSenha(rs.getString(2));
+                    finalResult = true;
+                }
+            }
+            
+        } catch (SQLException ex) {
+            ex.getMessage();
+        }
+        return finalResult;
+    }
+        
     public String Cadastro_Usuario(Usuario a) {
         String sql = "INSERT INTO usuarios VALUES (0,?,?,?)";
         try {
@@ -58,7 +81,7 @@ public class UsuarioDAO extends ExecuteSQL {
         }
     }
 
-        public boolean VerificaLogin(String nome){
+    public boolean VerificaLogin(String nome){
         boolean finalResult = false;
         
         try {
@@ -177,7 +200,8 @@ public class UsuarioDAO extends ExecuteSQL {
     }
 
     public String Excluir_Usuario(String usuario){
-        String sql = "DELETE FROM usuarios WHERE nome = '"+ usuario +"'";
+        String sql = "DELETE FROM usuarios,cifras USING usuarios,cifras WHERE usuarios.nome = '"+ usuario +"' AND "
+                + "cifras.nome_usuario = '"+ usuario +"'";
         try {
             PreparedStatement ps = getCon().prepareStatement(sql);
             

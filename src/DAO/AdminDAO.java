@@ -61,7 +61,7 @@ public class AdminDAO extends ExecuteSQL {
         boolean finalResult = false;
         
         try {
-            String consulta  = "SELECT nome FROM usuarios WHERE nome = '"+ nome +"'";
+            String consulta  = "SELECT nome FROM admin WHERE nome = '"+ nome +"'";
             PreparedStatement ps = getCon().prepareStatement(consulta);
             ResultSet rs = ps.executeQuery();
             
@@ -78,33 +78,7 @@ public class AdminDAO extends ExecuteSQL {
         }
         return finalResult;
     }
-        
-    public List<Usuario> ListarUsuarios() {
-        String sql = "SELECT id,nome,email FROM usuarios";
-        List<Usuario> lista = new ArrayList<>();
-            
-        try {
-            PreparedStatement ps = getCon().prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
-            
-            if (rs != null) {
-                while (rs.next()) {
-                    Usuario a = new Usuario();
-                    a.setId(rs.getInt(1));
-                    a.setNome(rs.getString(2));
-                    a.setEmail(rs.getString(3));
-                    
-                    lista.add(a);
-                }
-                return lista;
-            } else {
-                return null;
-            }
-        } catch (Exception e) {
-            return null;
-        }
-    }
-    
+           
     public List<Admin> CapturarAdmin(String usuario){
         String sql = "SELECT * FROM admin WHERE nome = '"+ usuario + "'";
         List<Admin> lista = new ArrayList<>();
@@ -147,19 +121,5 @@ public class AdminDAO extends ExecuteSQL {
             return e.getMessage();
         }
     }
-
-    public String Excluir_Usuario(String usuario){
-        String sql = "DELETE FROM usuarios WHERE nome = '"+ usuario +"'";
-        try {
-            PreparedStatement ps = getCon().prepareStatement(sql);
-            
-            if (ps.executeUpdate() > 0) {
-                return "Excluído com sucesso!";
-            } else {
-                return "Erro ao excluir!";
-            }
-        } catch (Exception e) {
-            return e.getMessage();
-        }
-    }    
+    
 }
